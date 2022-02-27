@@ -96,7 +96,7 @@ const Login = () => {
                   value={user.password}
                   onChange={handleChange}
                 />
-                />
+                
               </div>
               <div class="mb-3 form-check">
                 <input

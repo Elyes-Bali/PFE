@@ -7,7 +7,8 @@ import {
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import './Navbar.css';
-const Navsbar = () => {
+const Navsbar = ({auth}) => {
+  console.log()
   return (
     <div>
       <Navbar bg="light shadow" expand="lg">
@@ -46,9 +47,11 @@ const Navsbar = () => {
             </li>
             </Nav>
             <NavLink className="navbar-brand fw-bolder fs-4 mx-auto" to="/">
-              Opportunity
+              <img src="/images/transparent.png" width="190" height={50} style={{ marginRight: '5rem' }}/>
             </NavLink>
-
+            {/* here */}
+            {auth ?
+            <>
             <NavLink to='/login' className="btn btn-outline-primary ms-auto px-4 rounded-pill">
             <i className='fa fa-sign-in me-2'></i>
 
@@ -59,11 +62,21 @@ const Navsbar = () => {
 
               Register
             </NavLink>
+            </>
+            :
+              <>
             <NavLink to='/dashboard' className="btn btn-outline-primary ms-2 px-4 rounded-pill">
             <i className="fa fa-user-plus me-2"></i>
-
+            
               Dashboard
             </NavLink>
+            <NavLink to='/logout' className="btn btn-outline-primary ms-2 px-4 rounded-pill">
+            <i className="fa fa-sign-out me-2"></i>
+
+              Logout
+            </NavLink>
+            </>
+            }
           </Navbar.Collapse>
         </Container>
       </Navbar>

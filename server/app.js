@@ -4,7 +4,7 @@ const express = require('express');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require ('cookie-parser');
-
+const authenticate= require ('./middleware/authenticate');
 const app = express();
 
 // Configure ENV File & Require Connection File
@@ -66,11 +66,7 @@ app.post('/login', async (req, res)=>{
             if(isMatch){
                 // Generate Token Which is Define in User Schema
                 const token = await user.generateToken();
-                res.cookie("jwt", token, {
-                    // Expires Token in 24 Hours
-                    expires : new Date(Date.now() + 86400000),
-                    httpOnly : true
-                })
+                res.cookie("jwt", token )
                 res.status(200).send("LoggedIn")
             }else{
                 res.status(400).send("Invalid Credentials");
@@ -109,6 +105,18 @@ app.post('/message', async (req, res)=>{
         res.status(400).send(error)
     }
 })
+
+// Logout Page
+app.get('/logout', (req, res)=>{
+    res.clearCookie("jwt", {path : '/'})
+    res.status(200).send("User Logged Out")
+})
+
+//Authentification
+app.get('/auth', authenticate, (req, res)=>{
+
+})
+
 
 // Run server
 app.listen(port, ()=>{

@@ -35,10 +35,13 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <About />
+      <About  id="contact"/>
       <Services/>
-      <Contact/>
+      <div>
+        
+      <Contact  id="contact"/>
       
+      </div>
     </div>
   );
 };

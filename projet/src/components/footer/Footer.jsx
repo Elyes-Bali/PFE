@@ -9,7 +9,7 @@ const Footer = () => {
           <footer className="py-5">
             <div className="row">
               <div className="col-3">
-                <h4>FINE ART</h4>
+                <h4>OPPORTUNITY</h4>
               </div>
               <div className="col-2">
                 <h5>Section</h5>

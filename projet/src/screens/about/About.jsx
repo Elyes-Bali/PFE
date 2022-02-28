@@ -1,8 +1,9 @@
 import React from "react";
-const About = () => {
+
+const About = ({id}) => {
   return (
     <div>
-      <section id="about">
+      <section >
         <div className="container my-5 py-5">
           <div className="row">
             <div className="col-md-6">
@@ -15,7 +16,7 @@ const About = () => {
               We give the oppurtunity to all our clients to get 
               there work done by our profional devellopers in  </p>
               <button className="btn btn-primary rounded-pill px-4 py-2">Get Started</button>
-              <button className="btn btn-primary rounded-pill px-4 py-2 ms-2">Contact Us</button>
+              <a href={`#${id}`} className="btn btn-primary rounded-pill px-4 py-2 ms-2" >Contact Us</a>
             </div>
           </div>
         </div>

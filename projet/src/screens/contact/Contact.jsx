@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Contact = () => {
+const Contact = ({id}) => {
 
   
 
@@ -59,8 +59,8 @@ const Contact = () => {
   }
 
   return (
-    <div>
-      <section id="contact">
+    <div id={id}>
+      <section>
         <div className="container my-5 py-5">
           <div className="row mb-5">
             <div className="col-12">

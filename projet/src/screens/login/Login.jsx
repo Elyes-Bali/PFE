@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
 
   const [user, setUser]= useState({
     email : '',
@@ -34,8 +36,10 @@ const Login = () => {
       if(res.status === 400 || !res){
         window.alert("Invlid Credentials")
       }else {
-        window.alert("Login Successfull");
+        // window.alert("Login Successfull");
+        navigate('/')
         window.location.reload();
+        
       }
 
     } catch (error) {

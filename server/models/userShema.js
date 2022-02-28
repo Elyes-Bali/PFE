@@ -18,14 +18,14 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    tokens : [
-        {
-            token : {
-                type : String,
-                required : true
-            }
-        }
-    ]
+    // tokens : [
+    //     {
+    //         token : {
+    //             type : String,
+    //             required : true
+    //         }
+    //     }
+    // ]
 })
 
 // Hashing Password to Secure
@@ -39,9 +39,9 @@ userSchema.pre('save', async function(next){
 // Generate Tokens to Verify User
 userSchema.methods.generateToken = async function(){
     try {
-        let generatedToken = jwt.sign({_id : this._id}, process.env.SECRET_KEY);
-        this.tokens = this.tokens.concat({token : generatedToken});
-        await this.save();
+        const generatedToken = jwt.sign({_id : this._id}, process.env.SECRET_KEY);
+        // this.tokens = this.tokens.concat({token : generatedToken});
+        // await this.save();
         return generatedToken;
     } catch (error) {
         console.log(error)
@@ -49,6 +49,4 @@ userSchema.methods.generateToken = async function(){
 }
 
 // Create Model
-const Users = new mongoose.model("USER", userSchema);
-
-module.exports = Users;
+module.exports = Users =  mongoose.model("USER", userSchema);

@@ -7,8 +7,12 @@ import {
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import './Navbar.css';
-const Navsbar = ({auth}) => {
-  console.log()
+const Navsbar = () => {
+  const token = localStorage.getItem('token')
+  const handleLogout=()=>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('isAdmin')
+  }
   return (
     <div>
       <Navbar bg="light shadow" expand="lg">
@@ -47,10 +51,10 @@ const Navsbar = ({auth}) => {
             </li>
             </Nav>
             <NavLink className="navbar-brand fw-bolder fs-4 mx-auto" to="/">
-              <img src="/images/transparent.png" width="190" height={50} style={{ marginRight: '5rem' }}/>
+              <img src="/images/transparent.png" width="195" height={50} style={{ marginRight: '11rem' }}/>
             </NavLink>
             {/* here */}
-            {auth ?
+            {!token ?
             <>
             <NavLink to='/login' className="btn btn-outline-primary ms-auto px-4 rounded-pill">
             <i className='fa fa-sign-in me-2'></i>
@@ -70,7 +74,7 @@ const Navsbar = ({auth}) => {
             
               Dashboard
             </NavLink>
-            <NavLink to='/logout' className="btn btn-outline-primary ms-2 px-4 rounded-pill">
+            <NavLink onClick={handleLogout} to='/logout' className="btn btn-outline-primary ms-2 px-4 rounded-pill">
             <i className="fa fa-sign-out me-2"></i>
 
               Logout

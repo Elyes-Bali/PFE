@@ -1,6 +1,6 @@
 import React from "react";
 
-const About = ({id}) => {
+const About = ({id , id1}) => {
   return (
     <div>
       <section >
@@ -15,7 +15,7 @@ const About = ({id}) => {
               <p className="lead mb-4">First off all we wanna welcome you to our Website ,
               We give the oppurtunity to all our clients to get 
               there work done by our profional devellopers in  </p>
-              <button className="btn btn-primary rounded-pill px-4 py-2">Get Started</button>
+              <a href={`#${id1}`} className="btn btn-primary rounded-pill px-4 py-2">Our Services</a>
               <a href={`#${id}`} className="btn btn-primary rounded-pill px-4 py-2 ms-2" >Contact Us</a>
             </div>
           </div>

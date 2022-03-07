@@ -1,5 +1,8 @@
 import React from 'react';
 import Devcard from '../../components/devcard/Devcard';
+import  './Community.css';
+import ReactDOM from "react-dom";
+
 
 
 const Comunity = () => {
@@ -8,5 +11,8 @@ const Comunity = () => {
       
   </div>;
 };
+
+
+
 
 export default Comunity;

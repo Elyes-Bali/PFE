@@ -1,52 +1,65 @@
 import React, { useState } from "react";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
-
   const navigate = useNavigate();
 
-  const [user, setUser]= useState({
-    email : '',
-    password : ''
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
   });
 
   //Handle Input
-  const handleChange = (event) =>{
-    let name = event.target.name
-    let value = event.target.value
+  const handleChange = (event) => {
+    let name = event.target.name;
+    let value = event.target.value;
 
-    setUser({...user, [name]:value})
-  }
+    setUser({ ...user, [name]: value });
+  };
 
   //Handle Login
-  const handleSubmit = async (event) =>{
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const {email, password}= user;
+    const config = {headers: {"Content-Type": "application/json"},}
+    // const {email, password}= user;
     try {
-      const res = await fetch ('/login' , {
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
-          email, password
-        })
-      });
-
-      if(res.status === 400 || !res){
-        window.alert("Invlid Credentials")
-      }else {
-        // window.alert("Login Successfull");
-        navigate('/')
-        window.location.reload();
-        
+      const res = await axios.post("/api/user/login",user,config);
+      localStorage.setItem("token", res.data.token);
+      console.log(res.data.searchedUser)
+      if (res.data.searchedUser.isAdmin.toString()=== 'true'){localStorage.setItem("isAdmin",res.data.searchedUser.isAdmin)};
+      if(res.data.searchedUser.isAdmin){
+        navigate('/dashboard');
+        window.location.reload()
       }
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
+        // {
+        //   method : "POST",
+        //
+        //   body : JSON.stringify({
+        //     email, password
+        //   })
+        // }
+      
+      // console.log(res.data.token);
+      
+      
+      
+    } catch (error) {
+      const {errors , msg }= error.response.data
+      if (Array.isArray(errors)){
+        errors.map((el)=> alert(el.msg))
+      }
+      if (msg){
+        alert(msg)
+      }
+      // if (res.status === 400 || !res) {
+      //   window.alert("Invlid Credentials");}
+      console.log(error);
+      
+    }
+  };
 
   return (
     <div>
@@ -57,7 +70,9 @@ const Login = () => {
                  align-items-center text-white justify-content-center form"
           >
             <h1 className="display-4 fw-bolder">Welcome Back</h1>
-            <p className="lead text-center">Enter Your Email And Password To Login</p>
+            <p className="lead text-center">
+              Enter Your Email And Password To Login
+            </p>
             <h5 className="mb-4">OR</h5>
             <NavLink
               to="/register"
@@ -70,7 +85,7 @@ const Login = () => {
           <div className="col-md-6 p-5">
             <h1 className="display-6 fw-bolder mb-5 ">LOGIN</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">
                   Email address
@@ -100,7 +115,6 @@ const Login = () => {
                   value={user.password}
                   onChange={handleChange}
                 />
-                
               </div>
               <div class="mb-3 form-check">
                 <input
@@ -112,8 +126,12 @@ const Login = () => {
                   Remember me
                 </label>
               </div>
-              <button type="submit" class="btn btn-primary w-100 mt-4 rounded-pill">
-               Login
+              <button
+                type="submit"
+                class="btn btn-primary w-100 mt-4 rounded-pill"
+                onClick={(e)=>handleSubmit(e)}
+              >
+                Login
               </button>
             </form>
           </div>

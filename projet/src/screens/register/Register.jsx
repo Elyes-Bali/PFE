@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import './Register.css'
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+
 const Register = () => {
 
   const navigate = useNavigate();
@@ -120,6 +122,19 @@ const Register = () => {
                   onChange={handleInput }  
                 />
               </div>
+
+              Role
+              <div  >
+                
+               <select class="form-control">
+                 <option>--SELECT--</option>
+                 <option  value="clt">CLIENT</option>
+                 <option  value="dev">FREELANCER</option>
+               </select>
+
+              </div>
+
+              
               <div class="mb-3 form-check">
                 <input
                   type="checkbox"

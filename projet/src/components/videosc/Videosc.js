@@ -1,6 +1,4 @@
 import React from 'react';
-import { Button } from '../navvbare/Button';
-
 
 import './Videosc.css';
 

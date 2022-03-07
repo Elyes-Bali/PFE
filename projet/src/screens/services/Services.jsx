@@ -1,10 +1,10 @@
 import React from "react";
 
 
-const Services = () => {
+const Services = ({id1}) => {
   return (
-    <div>
-      <section id="service">
+    <div id={id1}>
+      <section >
         <div className="container my-5 py-5">
           <div className="row">
             <div className="col-12">

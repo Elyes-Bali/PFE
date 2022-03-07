@@ -11,9 +11,11 @@ import Login from "./screens/login/Login";
 import Register from "./screens/register/Register";
 import Dashboard from "./screens/dashboard/Dashboard";
 import Logout from "./screens/logout/Logout";
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./components/routes/ProtectedRoute";
 import { useEffect, useState } from "react";
 import Contact from "./screens/contact/Contact";
+import Adminroute from "./components/routes/Adminroute";
+import Body from "./screens/profiledev/Body";
 
 function App() {
 
@@ -21,54 +23,55 @@ function App() {
   const [auth, setauth] = useState(false);
   const [auth1, setauth1] = useState(true);
 
-  const isLoggedIn = async () => {
-    try {
-      const res = await fetch('/auth', {
-        method : "GET",
-        headers : {
-          Accept : "application/json",
-          "Content-Type" : "application/json"
-        },
-        credentials : "include"
-      });
+  // const isLoggedIn = async () => {
+  //   try {
+  //     const res = await fetch('/auth', {
+  //       method : "GET",
+  //       headers : {
+  //         Accept : "application/json",
+  //         "Content-Type" : "application/json"
+  //       },
+  //       credentials : "include"
+  //     });
 
-      if(res.status === 200){
-        setauth(true)
-        setauth1(false)
-      }
-      if(res.status === 401){
-        setauth(false)
-        setauth1(true)
-      }
+  //     if(res.status === 200){
+  //       setauth(true)
+  //       setauth1(false)
+  //     }
+  //     if(res.status === 401){
+  //       setauth(false)
+  //       setauth1(true)
+  //     }
 
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  useEffect(() => {
-    isLoggedIn();
-  }, []);
+  // useEffect(() => {
+  //   isLoggedIn();
+  // }, []);
 
 
   return (
     <div>
-      <Navsbar auth={auth1}/>
+      <Navsbar />
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/contact" element={<Contact/>}/>
         
         <Route path="/Comunity" element={<Comunity/>}/>
         <Route path="/Offers" element={<Offers/>}/>
-        <Route path="/Profile" element={<Profile/>}/>
+        <Route path="/Profile" element={<Body/>}/>
         <Route element={<ProtectedRoute auth={auth1}/>}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />}/>
         </Route>
-        <Route element={<ProtectedRoute auth={auth}/>}>
+        <Route element={<Adminroute />}>
         <Route path="/dashboard" element={<Dashboard/>}/>
         </Route>
         <Route path="/logout" element={<Logout/>}/>
+        <Route path="/Profil" element={<Profile/>}/>
         
       </Routes>
       <Footer/>

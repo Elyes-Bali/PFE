@@ -31,3 +31,9 @@ footer{
   background: linear-gradient(90deg, rgb(33, 104, 184) 40%, rgba(0, 212, 255, 1)
   90%);
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}

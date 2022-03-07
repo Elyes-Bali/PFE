@@ -8,7 +8,7 @@ import Services from "../services/Services";
 
 const Home = () => {
   return (
-    <div>
+    <div  >
       <section id="home">
         <div className="container">
           <div className="row justify-content-center">
@@ -20,7 +20,7 @@ const Home = () => {
                 We give you the opportunity to work and get you're work done
               </p>
               <div className="buttons d-flex justify-content-center">
-                <NavLink to="/Contact"
+                <NavLink to="/login"
                   className="btn btn-light me-4 rounded-pill px-4 py-2"
                 >
                   Get Started
@@ -35,8 +35,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <About  id="contact"/>
-      <Services/>
+      <About  id="contact" id1="services"/>
+      <Services id1="services"/>
       <div>
         
       <Contact  id="contact"/>

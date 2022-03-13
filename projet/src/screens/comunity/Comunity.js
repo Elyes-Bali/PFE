@@ -6,9 +6,14 @@ import ReactDOM from "react-dom";
 
 
 const Comunity = () => {
-  return <div>
-      <Devcard/>
+  return <div className="container ">
+    <div className=" flex2 row justify-content-center " >
       
+      <Devcard/>
+      <Devcard/>
+      <Devcard/>
+     
+      </div>
   </div>;
 };
 

@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import Contact from "./screens/contact/Contact";
 import Adminroute from "./components/routes/Adminroute";
 import Body from "./screens/profiledev/Body";
+import Resumee from "./screens/resume/Resumee"
 
 function App() {
 
@@ -23,34 +24,34 @@ function App() {
   const [auth, setauth] = useState(false);
   const [auth1, setauth1] = useState(true);
 
-  // const isLoggedIn = async () => {
-  //   try {
-  //     const res = await fetch('/auth', {
-  //       method : "GET",
-  //       headers : {
-  //         Accept : "application/json",
-  //         "Content-Type" : "application/json"
-  //       },
-  //       credentials : "include"
-  //     });
+  const isLoggedIn = async () => {
+    try {
+      const res = await fetch('/api/user/auth', {
+        method : "GET",
+        headers : {
+          Accept : "application/json",
+          "Content-Type" : "application/json"
+        },
+        credentials : "include"
+      });
 
-  //     if(res.status === 200){
-  //       setauth(true)
-  //       setauth1(false)
-  //     }
-  //     if(res.status === 401){
-  //       setauth(false)
-  //       setauth1(true)
-  //     }
+      if(res.status === 200){
+        setauth(true)
+        setauth1(false)
+      }
+      if(res.status === 401){
+        setauth(false)
+        setauth1(true)
+      }
 
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  // useEffect(() => {
-  //   isLoggedIn();
-  // }, []);
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
 
   return (
@@ -62,7 +63,7 @@ function App() {
         
         <Route path="/Comunity" element={<Comunity/>}/>
         <Route path="/Offers" element={<Offers/>}/>
-        <Route path="/Profile" element={<Body/>}/>
+        <Route path="/Profile" element={<Resumee />}/>
         <Route element={<ProtectedRoute auth={auth1}/>}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />}/>

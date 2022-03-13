@@ -162,7 +162,7 @@ const Resume = forwardRef((props, ref) => {
         key={"education"}
         draggable
         onDragOver={() => seTarget(info.education?.id)}
-        onDragEnd={() => setSource(info.education?.id)}
+        onDragEnd={() => setSource(info.education?.id)}s
         className={`${styles.section} ${
           info.education?.sectionTitle ? "" : styles.hidden
         }`}

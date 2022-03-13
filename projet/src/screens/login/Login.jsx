@@ -8,6 +8,7 @@ const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    
   });
 
   //Handle Input
@@ -18,46 +19,80 @@ const Login = () => {
     setUser({ ...user, [name]: value });
   };
 
+  // Problem here : can't register new user and can't login to other users,
+  //only admin can login othors can't
+
   //Handle Login
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const config = {headers: {"Content-Type": "application/json"},}
+    const config = { headers: { "Content-Type": "application/json" } };
     // const {email, password}= user;
     try {
-      const res = await axios.post("/api/user/login",user,config);
+      const res = await axios.post("/api/user/login", user, config);
       localStorage.setItem("token", res.data.token);
-      console.log(res.data.searchedUser)
-      if (res.data.searchedUser.isAdmin.toString()=== 'true'){localStorage.setItem("isAdmin",res.data.searchedUser.isAdmin)};
-      if(res.data.searchedUser.isAdmin){
-        navigate('/dashboard');
-        window.location.reload()
+      console.log(res.data.searchedUser);
+      if (res.data.searchedUser.role ==='dev') {localStorage.setItem("isDev", res.data.searchedUser.role);  navigate('/profile');  window.location.reload(); }
+      if (res.data.searchedUser.role ==='clt') {localStorage.setItem("isClient", res.data.searchedUser.role);  navigate('/profil');  window.location.reload(); }
+      if (res.data.searchedUser.isAdmin.toString() === "true") {
+        localStorage.setItem("isAdmin", res.data.searchedUser.isAdmin);
       }
-
-
-        // {
-        //   method : "POST",
-        //
-        //   body : JSON.stringify({
-        //     email, password
-        //   })
-        // }
+      // if (res.data.searchedUser.role ==='dev'){
+      //   localStorage.setItem("isDEv", res.data.searchedUser.isAdmin);
+      // }
+      // if (res.data.searchedUser.role) {
+      //   navigate("/profile");
+      //   window.location.reload();
+      // } 
+      // //  localStorage.setItem("isDev",res.data.searchedUser.role);
       
+      
+
+      // if ( JSON.stringify(res.data.searchedUser.role) =='dev') {
+      //    localStorage.setItem(
+      //     "isDev",
+      //   true
+         
+      //   );
+      // }
+      if (res.data.searchedUser.isAdmin) {
+        navigate("/dashboard");
+        window.location.reload();
+      } 
+        // navigate('/')
+
+
+
+
+
+
+
+      // JSON.parse(localStorage.getItem('key'));
+      // if (res.data.searchedUser.role.toString() === 'clt'){localStorage.setItem("isClient",res.data.searchedUser.role)};
+      // if(res.data.searchedUser.role.toString() === 'clt'){
+      //   navigate('/profil');
+      //   window.location.reload()
+      // }
+
+      // {
+      //   method : "POST",
+      //
+      //   body : JSON.stringify({
+      //     email, password
+      //   })
+      // }
+
       // console.log(res.data.token);
-      
-      
-      
     } catch (error) {
-      const {errors , msg }= error.response.data
-      if (Array.isArray(errors)){
-        errors.map((el)=> alert(el.msg))
+      const { errors, msg } = error.response.data;
+      if (Array.isArray(errors)) {
+        errors.map((el) => alert(el.msg));
       }
-      if (msg){
-        alert(msg)
+      if (msg) {
+        alert(msg);
       }
       // if (res.status === 400 || !res) {
       //   window.alert("Invlid Credentials");}
       console.log(error);
-      
     }
   };
 
@@ -129,7 +164,7 @@ const Login = () => {
               <button
                 type="submit"
                 class="btn btn-primary w-100 mt-4 rounded-pill"
-                onClick={(e)=>handleSubmit(e)}
+                onClick={(e) => handleSubmit(e)}
               >
                 Login
               </button>

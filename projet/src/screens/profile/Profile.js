@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 
 const Offers = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState();
   return (
     <div>
       <section >
@@ -18,7 +18,9 @@ const Offers = () => {
             src={URL.createObjectURL(selectedImage)}
           />
           <br />
-          <button  onClick={() => setSelectedImage(null)}>Remove</button>
+          <button onClick={(event) => {
+          setSelectedImage(event.target.files[0]===null);
+        }}>Remove</button>
         </div>
       )}
       <br />

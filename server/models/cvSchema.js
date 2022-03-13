@@ -1,89 +1,68 @@
 const mongoose = require('mongoose');
-const bcryptjs  = require('bcryptjs');
-const jwt  = require('jsonwebtoken');
 
 //CV Schema Or Document Structure
 const cvSchema = new mongoose.Schema({
+    userId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "userShema"
+        
+    },
+
+
     name : {
         type : String,
-        required : true
+        
         
     },
     title : {
         type : String,
-        required : true,
+       
         
     },
-    linkedinLink : {
+    linkedin : {
         type : String,
-        required : true
+        
     },
-    githubLink : {
+    github : {
         type : String,
-        required : true
-    },
-    email : {
-        type : String,
-        required : true
+        
     },
     phone : {
         type :Number,
-        required : true
+      
     },
-    companyName : {
+    project : {
         type : String,
-        required : true
+        
     },
-    certificate : {
+    project1 : {
         type : String,
-        required : true
+       
     },
-    location : {
+    project2 : {
         type : String,
-        required : true
+        
     },
-    startDate : {
-        type : Date,
-        required : true
-    },
-    endDate : {
-        type : Date,
-        required : true
-    },
-    workDes : {
+    languages : {
         type : String,
-        required : true
+        
     },
-    overview : {
+    languages1 : {
         type : String,
-        required : true
+       
     },
-    depLink : {
+    languages2 : {
         type : String,
-        required : true
-    },
-    projectDes : {
-        type : String,
-        required : true
+        
     },
     college : {
         type : String,
-        required : true
-    },
-    achievements : {
-        type : String,
-        required : true
+       
     },
     summary : {
         type : String,
-        required : true
-    },
-    other : {
-        type : String,
-        required : true
-    },
+      
+    }
 })
-cvSchema.pre('save', async function(next){
-    next();
-}),
-module.exports = CvInfo =  mongoose.model("CV", userSchema);
+
+module.exports = CvInfo =  mongoose.model("CV", cvSchema);

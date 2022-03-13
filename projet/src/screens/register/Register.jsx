@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import './Register.css'
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
@@ -10,7 +12,8 @@ const Register = () => {
   const [user, setUser]= useState({
     username : "",
     email : "",
-    password : ""
+    password : "",
+    role : ""
   });
 
   //Handle Input
@@ -22,25 +25,21 @@ const Register = () => {
   }
 
   //Handel Submit
-  const handleSubmit = async (event)=>{
-    event.preventDefault();
+  const handleSubmit = async ()=>{
+   
     //Object DeStructuring
     //Store Object Data into Variables
-    const {username, email, password}= user;
+    const config = {headers: {"Content-Type": "application/json"},}
     try {
       //It is Submitted on port 3000 by default
       //wich os Front end But we need to 
       //Submit it on Backend which is on
       // Port 3001. So we need Proxy
-      const res = await fetch('/register', {
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
-          username , email, password
-        })
-      })
+      const res = await axios.post('/api/user/register', user,config)
+       
+        
+        
+      
 
       if (res.status === 400 || !res){
         window.alert("Already Used Details")
@@ -51,6 +50,21 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const handelCheck = (e) => {
+    e.preventDefault();
+    if (!user.username || !user.email|| !user.password || !user.role ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+      
+    }else {
+      handleSubmit()
     }
   }
 
@@ -75,12 +89,13 @@ const Register = () => {
           <div className="col-md-6 p-5">
             
 
-            <form onSubmit={handleSubmit} method="POST">
+            <form >
               <div class="mb-3">
                 <label for="name" class="form-label">
                   Username
                 </label>
                 <input
+                  placeholder="write ur name"
                   type="text"
                   class="form-control"
                   id="name"
@@ -126,7 +141,7 @@ const Register = () => {
               Role
               <div  >
                 
-               <select class="form-control">
+               <select class="form-control"  onChange={handleInput } name="role" >
                  <option>--SELECT--</option>
                  <option  value="clt">CLIENT</option>
                  <option  value="dev">FREELANCER</option>
@@ -134,7 +149,7 @@ const Register = () => {
 
               </div>
 
-              
+              <br/>
               <div class="mb-3 form-check">
                 <input
                   type="checkbox"
@@ -142,10 +157,10 @@ const Register = () => {
                   id="exampleCheck1"
                 />
                 <label class="form-check-label" for="exampleCheck1">
-                  I Agree Terms And Conditions
+                   I Agree Terms And Conditions
                 </label>
               </div>
-              <button type="submit" class="btn btn-primary w-100 mt-4 rounded-pill">
+              <button onClick={handelCheck} type="button" class="btn btn-primary w-100 mt-4 rounded-pill">
                 Register
               </button>
             </form>

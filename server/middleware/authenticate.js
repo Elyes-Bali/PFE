@@ -2,30 +2,23 @@
 // It will checked before the response.
 
 const Users = require('../models/userShema');
-const jwt = require('jsonwebtoken')
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const passport = require("passport");
 
-const authenticate = async (req, res, next)=>{
-    try {
-        // Get the Cookies
-        const token = req.cookies.jwt;
-        if(!token){
-            res.status(401).send("No token")
-        }else{
-            const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-            const rootUser = await Users.findOne({_id : verifyToken._id, "tokens.token" : token});
-
-            if(!rootUser){
-                res.status(401).send("User Not Found")
-            }else{
-                res.status(200).send("Authorized User")
-            }
-        }
-
-        next()
-    } catch (error) {
-        res.status(401).send("Error")
-        console.log(error)
-    }
-}
-
-module.exports = authenticate;
+const opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.SECRET_KEY,
+  };
+  passport.use(
+    new JwtStrategy(opts, async (jwt_payload, done) => {
+      try {
+        const user = await Users.findOne({ _id: jwt_payload._id }).select("-password");
+        user ? done(null, user) : done(null, false);
+      } catch (error) {
+        console.log(error);
+      }
+    })
+  );
+  module.exports = isAuth = () =>
+    passport.authenticate("jwt", { session: false });

@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 // });
 
 app.use("/api/user", require ('./routs/User'))
-
+app.use("/api/res",require ('./routs/Cv') )
 
 // Message
 app.post("/message", async (req, res) => {

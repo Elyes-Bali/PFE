@@ -1,6 +1,7 @@
 .nav-links {
   color: inherit;
   text-decoration: inherit;
-  
- 
 }
+.nav_col{
+  text-align: justify;
+  }

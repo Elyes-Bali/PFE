@@ -1,7 +1,7 @@
 const bcryptjs = require("bcryptjs");
 // Require Model
-const Users = require("../models/userShema");
-const authenticate = require("../middleware/authenticate");
+const User = require("../models/userShema");
+const isAuth = require("../middleware/authenticate");
 const express = require("express");
 const router = express.Router();
 
@@ -13,14 +13,14 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     // Get body or Data
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
+    const {username, email, password,role} = req.body;
+    console.log(username, email, password,role)
 
-    const createUser = new Users({
-      username: username,
-      email: email,
-      password: password,
+    const createUser = new User({
+      username,
+      email,
+      password,
+      role
     });
 
     // Save Method is Used to Create User or Insert User
@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
     const password = req.body.password;
 
     // Find User if Exist
-    const user = await Users.findOne({ email: email });
+    const user = await User.findOne({ email: email });
 
     if (!user) {
      return res.status(400).send({ msg: "Invalid Credentials" });
@@ -63,6 +63,8 @@ router.post("/login", async (req, res) => {
   }
 });
 //Authentification
-router.get("/auth", authenticate, (req, res) => {});
+router.get("/auth", isAuth(), (req, res) => {
+  res.status(200).send({user : req.user})
+});
 
 module.exports = router;

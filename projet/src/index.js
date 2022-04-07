@@ -5,16 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
-import 'font-awesome/css/font-awesome.min.css'
+import 'font-awesome/css/font-awesome.min.css';
+import { ChakraProvider } from '@chakra-ui/react'
 
 ReactDOM.render(
   <React.StrictMode>
+    <ChakraProvider>
     <BrowserRouter>
     <App />
     </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")
-);
+);  
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

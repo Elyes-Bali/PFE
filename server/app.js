@@ -3,9 +3,9 @@ console.clear();
 const cors= require("cors");
 const dotenv = require("dotenv");
 const express = require("express");
-
+const path = require("path");
 // const jwt = require("jsonwebtoken");
-// const cookieParser = require("cookie-parser");
+
 
 const app = express();
 
@@ -21,14 +21,27 @@ const Message = require("./models/msgSchema");
 app.use(express.json());
 app.use(cors())
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World");
+// app.use("/photoimgs", express.static("./photoimgs"));
+app.use('/photoimgs', express.static(path.join(__dirname, 'photoimgs')));
+app.use("/api/user", require ('./routs/User'))
+app.use("/api/user/upload",require("./routs/PhotoImgsUpload"));
+app.use("/api/res",require ('./routs/Cv') )
+app.use("/api/offer",require ('./routs/Offers') )
+
+// app.post("/upload", (req, res) => {
+//   // use modules such as express-fileupload, Multer, Busboy
+  
+//   setTimeout(() => {
+//       console.log('file uploaded')
+//       return res.status(200).json({ result: true, msg: 'file uploaded' });
+//   }, 3000);
 // });
 
-app.use("/api/user", require ('./routs/User'))
-app.use("/api/res",require ('./routs/Cv') )
+// app.delete("/upload", (req, res) => {
+//   console.log(`File deleted`)
+//   return res.status(200).json({ result: true, msg: 'file deleted' });
+// });
 
 // Message
 app.post("/message", async (req, res) => {
@@ -55,11 +68,7 @@ app.post("/message", async (req, res) => {
   }
 });
 
-// Logout Page
-// app.get("/logout", (req, res) => {
-//   res.clearCookie("jwt", { path: "/" });
-//   res.status(200).send("User Logged Out");
-// });
+// app.use('/api/us')
 
 
 

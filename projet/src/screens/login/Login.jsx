@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../components/footer/Footer";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,7 +9,6 @@ const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    
   });
 
   //Handle Input
@@ -26,45 +26,51 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const config = { headers: { "Content-Type": "application/json" } };
+   
     // const {email, password}= user;
     try {
       const res = await axios.post("/api/user/login", user, config);
       localStorage.setItem("token", res.data.token);
       console.log(res.data.searchedUser);
-      if (res.data.searchedUser.role ==='dev') {localStorage.setItem("isDev", res.data.searchedUser.role);  navigate('/profile');  window.location.reload(); }
-      if (res.data.searchedUser.role ==='clt') {localStorage.setItem("isClient", res.data.searchedUser.role);  navigate('/profil');  window.location.reload(); }
+      if (res.data.searchedUser.role === "dev") {
+        localStorage.setItem("isDev", res.data.searchedUser.role);
+        setTimeout(() => {
+          window.location.reload();
+          navigate("/");
+        }, 3000);
+        
+       
+      }
+      if (res.data.searchedUser.role === "clt") {
+        localStorage.setItem("isClient", res.data.searchedUser.role);
+        navigate("/profil");
+        window.location.reload();
+      }
       if (res.data.searchedUser.isAdmin.toString() === "true") {
         localStorage.setItem("isAdmin", res.data.searchedUser.isAdmin);
       }
+
       // if (res.data.searchedUser.role ==='dev'){
       //   localStorage.setItem("isDEv", res.data.searchedUser.isAdmin);
       // }
       // if (res.data.searchedUser.role) {
       //   navigate("/profile");
       //   window.location.reload();
-      // } 
+      // }
       // //  localStorage.setItem("isDev",res.data.searchedUser.role);
-      
-      
 
       // if ( JSON.stringify(res.data.searchedUser.role) =='dev') {
       //    localStorage.setItem(
       //     "isDev",
       //   true
-         
+
       //   );
       // }
       if (res.data.searchedUser.isAdmin) {
         navigate("/dashboard");
         window.location.reload();
-      } 
-        // navigate('/')
-
-
-
-
-
-
+      }
+      // navigate('/')
 
       // JSON.parse(localStorage.getItem('key'));
       // if (res.data.searchedUser.role.toString() === 'clt'){localStorage.setItem("isClient",res.data.searchedUser.role)};
@@ -121,49 +127,49 @@ const Login = () => {
             <h1 className="display-6 fw-bolder mb-5 ">LOGIN</h1>
 
             <form>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
+              <div className="mb-3">
+                <label for="exampleInputEmail1" className="form-label">
                   Email address
                 </label>
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   name="email"
                   value={user.email}
                   onChange={handleChange}
                 />
-                <div id="emailHelp" class="form-text">
+                <div id="emailHelp" className="form-text">
                   We'11 never share your email with anyone else.
                 </div>
               </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">
+              <div className="mb-3">
+                <label for="exampleInputPassword1" className="form-label">
                   Password
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   id="exampleInputPassword1"
                   name="password"
                   value={user.password}
                   onChange={handleChange}
                 />
               </div>
-              <div class="mb-3 form-check">
+              <div className="mb-3 form-check">
                 <input
                   type="checkbox"
-                  class="form-check-input"
+                  className="form-check-input"
                   id="exampleCheck1"
                 />
-                <label class="form-check-label" for="exampleCheck1">
+                <label className="form-check-label" for="exampleCheck1">
                   Remember me
                 </label>
               </div>
               <button
                 type="submit"
-                class="btn btn-primary w-100 mt-4 rounded-pill"
+                className="btn btn-primary w-100 mt-4 rounded-pill"
                 onClick={(e) => handleSubmit(e)}
               >
                 Login
@@ -172,6 +178,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

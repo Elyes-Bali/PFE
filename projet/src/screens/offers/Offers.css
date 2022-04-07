@@ -1,0 +1,9 @@
+#offers {
+    background: Orgb(0, 101, 219);
+    background: linear-gradient(
+      90deg,
+      rgb(235, 75, 101) 50%,
+      rgb(63, 207, 236) 100%
+    );
+    min-height: 500px;
+  }

@@ -3,25 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.7",
+    "@cometchat-pro/chat": "^3.0.6",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
     "font-awesome": "^4.7.0",
-    "formik": "^2.2.9",
+    "framer-motion": "^6.2.8",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
+    "react-currency-input-field": "^3.6.4",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-spring": "^9.4.4",
     "react-switch": "^6.0.0",
     "styled-components": "^5.3.3",
     "sweetalert2": "^11.4.4",
-    "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "web-vitals": "^2.1.4"
+    
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,17 +44,17 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
+  "browserslist": [
+   
       ">0.2%",
       "not dead",
       "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    
+    
+  ],
+  
+  "devDependencies": {
+    "sass": "^1.49.10"
   },
   "proxy": "http://localhost:5000"
 }

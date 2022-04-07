@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import InputControl from "../profiledev/InputControl";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import "./Resume.css";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 const Resumee = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const [multipleFiles, setMultipleFiles] = useState();
+  const MultipleFileChange = (e) => {
+    setMultipleFiles(e.target.files);
+  };
 
   const [values, setValues] = useState({
     userId: "",
@@ -23,96 +28,103 @@ const Resumee = () => {
     college: "",
     languages: "",
     languages1: "",
-    languages2: ""
+    languages2: "",
+    images: [],
   });
- const [user,setUser]= useState({
-   
- });
- const [listcvs,setListcvs]=useState([])
- 
+  const [user, setUser] = useState({});
+
   //Handle Input
   const handleInput = (event) => {
-    let name = event.target.name;
+    let name = event.target.name;    
     let value = event.target.value;
 
     setValues({ ...values, [name]: value });
-  };
+  };   
 
   const isLoggedIn = async () => {
-    const options = {
+    const options = { 
       headers: {
         Authorization: localStorage.getItem("token"),
       },
     };
     try {
-      
-      const res = await axios.get('/api/user/auth',options);
-      setUser(res.data.user)
-      console.log(user)
+      const res = await axios.get("/api/user/auth", options);
+      setUser(res.data.user);
+      setValues({ ...values, userId: res.data.user._id });
+      // setValues({...values,userId:res.data.user._id})
+      // console.log(user);
       // const user = res.data.user
       // return user
       // console.log(res.data.user)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  const getAllCvs = async () =>{
-    try {
-      const res = await axios.get('/api/res/getallcv');
-      setListcvs(res.data.result)
-      // console.log(res.data.result)
-    } catch (error) {
-      
-    }
-  }
-
-  useEffect(() => {
-   isLoggedIn();
-  getAllCvs();
-    console.log(listcvs)
-  setValues ({...values, userId :user}) 
-  }, [user.length,listcvs.length ]);
-
-
-
-
-  const handleSubmit = async ()=>{
-   
+  const handleSubmit = async () => {
     //Object DeStructuring
     //Store Object Data into Variables
-    
 
-    const config = {headers: {"Content-Type": "application/json"},}
+    const config = { headers: { "Content-Type": "application/json" } };
     try {
       //It is Submitted on port 3000 by default
-      //wich os Front end But we need to 
+      //wich os Front end But we need to
       //Submit it on Backend which is on
       // Port 3001. So we need Proxy
-      
 
-      const res = await axios.post('/api/res/resume', values,config)
+      const res = await axios.post("/api/res/resume", values, config);
 
-      alert(`${res.data.msg}`)
+      alert(`${res.data.msg}`);
 
       // if (res.status === 400 || !res){
       //   window.alert("Already Filled")
       // }else{
       //   //You need to Restart the server for Proxy Works
       //   window.alert("Saved Successfully");
-      //   navigate('/')
+      //   navigate('/profile')
       // }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+  const uploadFileHandler = async () => {
+    setValues({ ...values, images: [] });
+    // console.log(multipleFiles)
+    // const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    for (let i = 0; i < multipleFiles.length; i++) {
+      bodyFormData.append("files", multipleFiles[i]);
+    }
+    // console.log(bodyFormData);
+
+    const res = await axios.post(
+      "http://localhost:5000/api/user/upload/multipesfiles",
+      bodyFormData
+    );
+    // console.log(res.data.imgs)
+    setValues({ ...values, images: res.data.imgs });
+    // res.data.imgs.map((el)=>values.images.push(el))
+
+    // console.log(imgs)
+  };
 
 
+  useEffect(() => {
+    isLoggedIn();  
+    
+  }, []); 
+
+
+  const hundelUpdateProfile = async (userr) => {
+    const config = { headers: { "Content-Type": "application/json" } };
+    const res = await axios.put(`/api/user/update/${user._id}`, userr, config);
+
+   
+  };
 
   return (
     <div>
-      
-      <section>
+      <section id="Resume">
         <div className="container my-5 py-5">
           <div className="row">
             <div className="col-md-6">
@@ -132,167 +144,216 @@ const Resumee = () => {
           </div>
         </div>
       </section>
+      {/* here */}
       <div className="container shadow my-5">
-      <section>
-        <div className="container my-5 py-5">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="fd-5 text-center mb-0">Your Resume</h3>
-              <h1 className="display-6 text-center mb-4">
-                Speak <b>About</b> Yourself
-              </h1>
-              <hr className="w-25 mx-auto" />
-            </div>
-          </div>
-          <form>
-          <div className="row">
-            <div className="fd-5 text-center">
-              <Form>
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="Name">
-                    <Form.Label>Full Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Full Name"
-                      name="name"
-                      value={values.name}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
+        <Tabs variant="soft-rounded" colorScheme="red">
+          <TabList className=" justify-content-center">
+            <Tab>
+              <i className="fa fa-address-card-o px-2" aria-hidden="true"></i>
+              Resume
+            </Tab>
+            <Tab>
+              <i className="fa fa-upload ms-2 px-2"></i>Images
+            </Tab>
+            <Tab>
+              <i className="fa fa-upload ms-2 px-2"></i>Summary
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <section>
+                <div className="container my-5 py-5">
+                  <div className="row">
+                    <div className="col-12">
+                      <h3 className="fd-5 text-center mb-0">Your Resume</h3>
+                      <h1 className="display-6 text-center mb-4">
+                        Speak <b>About</b> Yourself
+                      </h1>
+                      <hr className="w-25 mx-auto" />
+                    </div>
+                  </div>
+                  <form>
+                    <div className="row">
+                      <div className="fd-5 text-center">
+                        <Form>
+                          <Row className="mb-3">
+                            <Form.Group as={Col} controlId="Name">
+                              <Form.Label>Full Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Full Name"
+                                name="name"
+                                
+                                onChange={handleInput}
+                              />
+                            </Form.Group>
 
-                  <Form.Group as={Col} controlId="Title">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter your title eg. Frontend developer"
-                      name="title"
-                      value={values.title}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
-                </Row>
+                            <Form.Group as={Col} controlId="Title">
+                              <Form.Label>Title</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter your title eg. Frontend developer"
+                                name="title"
+                                
+                                onChange={handleInput}
+                              />
+                            </Form.Group>
+                          </Row>
 
-                <Row className="mb-3">
-                  
+                          <Row className="mb-3">
+                            <Form.Group as={Col} controlId="College">
+                              <Form.Label>College</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter your College Name"
+                                name="college"
+                               
+                                onChange={handleInput}
+                              />
+                            </Form.Group>
+                          </Row>
 
-                  <Form.Group as={Col} controlId="College">
-                    <Form.Label>College</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter your College Name"
-                      name="college"
-                      value={values.college}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
-                </Row>
+                          <Row className="mb-3">
+                            <Form.Group as={Col} controlId="Github">
+                              <Form.Label>Github</Form.Label>
+                              <Form.Control
+                                placeholder="Enter your Github profile link"
+                                name="github"
+                                
+                                onChange={handleInput}
+                              />
+                            </Form.Group>
 
-                <Row className="mb-3">
-                  <Form.Group as={Col} controlId="Github">
-                    <Form.Label>Github</Form.Label>
-                    <Form.Control
-                      placeholder="Enter your Github profile link"
-                      name="github"
-                      value={values.github}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
+                            <Form.Group as={Col} controlId="Linkedin">
+                              <Form.Label>Linkedin</Form.Label>
+                              <Form.Control
+                                placeholder="Enter your Linkedin profile link"
+                                name="linkedin"
+                               
+                                onChange={handleInput}
+                              />
+                            </Form.Group>
 
-                  <Form.Group as={Col} controlId="Linkedin">
-                    <Form.Label>Linkedin</Form.Label>
-                    <Form.Control
-                      placeholder="Enter your Linkedin profile link"
-                      name="linkedin"
-                      value={values.linkedin}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
+                            <Form.Group as={Col} controlId="phone">
+                              <Form.Label>Phone Number</Form.Label>
+                              <Form.Control
+                                type="number"
+                                placeholder="Enter your Phone Number"
+                                name="phone"
+                                
+                                onChange={handleInput}
+                              />
+                            </Form.Group>
+                          </Row>
+                          <Form.Group as={Col} controlId="Project">
+                            <Form.Label>Your Projects</Form.Label>
 
-                  <Form.Group as={Col} controlId="phone">
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Enter your Phone Number"
-                      name="phone"
-                      value={values.phone}
-                      onChange={handleInput}
-                    />
-                  </Form.Group>
-                </Row>
-                <Form.Group as={Col} controlId="Project">
-                  <Form.Label>Your Projects</Form.Label>
+                            <InputControl
+                              placeholder="Line 1"
+                              name="project"
+                              
+                              onChange={handleInput}
+                            />
+                            <br />
+                            <InputControl
+                              placeholder="Line 2"
+                              name="project1"
+                             
+                              onChange={handleInput}
+                            />
+                            <br />
+                            <InputControl
+                              placeholder="Line 3"
+                              name="project2"
+                              
+                              onChange={handleInput}
+                            />
+                          </Form.Group>
+                          <br />
 
-                  <InputControl
-                    placeholder="Line 1"
-                    name="project"
-                    value={values.project}
+                          <Form.Group as={Col} controlId="Languages">
+                            <Form.Label>Languages</Form.Label>
+
+                            <InputControl
+                              placeholder="Line 1"
+                              name="languages"
+                              
+                              onChange={handleInput}
+                            />
+                            <br />
+                            <InputControl
+                              placeholder="Line 2"
+                              name="languages1"
+                            
+                              onChange={handleInput}
+                            />
+                            <br />
+                            <InputControl
+                              placeholder="Line 3"
+                              name="languages2"
+                             
+                              onChange={handleInput}
+                            />
+                          </Form.Group>
+                          <br />
+                        </Form>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </TabPanel>
+            <TabPanel>
+              <input
+                type="file"
+                name="file"
+                onChange={(e) => MultipleFileChange(e)}
+                className="form-control"
+                multiple
+              />
+              <button type="button" onClick={uploadFileHandler}>
+                Submit
+              </button>
+              {/* {values.images[0]} */}
+              {/* <img src={`http://localhost:5000${values.images[0]?.filePath}`}/> */}
+
+              {values?.images
+                ? values.images.map((el,index) => (
+                    <div key={index}>
+                      <img
+                        alt="hello"
+                        src={`http://localhost:5000${el.filePath}`}
+                        width="250"
+                      />
+                    </div>
+                  ))
+                : null}
+              {/* {imgs?imgs.map((el)=><div>{el.files.map((file)=><h1>ggggggggend </h1>)}</div>):null}   */}
+            </TabPanel>
+            <TabPanel>
+              <Form.Group className="mb-3" controlId="Summary">
+                <Form.Label>Your Summary</Form.Label>
+                <FloatingLabel controlId="floatingTextarea2" label="Summary">
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Leave a comment here"
+                    style={{ height: "100px" }}
+                    name="summary"
+                    
                     onChange={handleInput}
                   />
-                  <br />
-                  <InputControl
-                    placeholder="Line 2"
-                    name="project1"
-                    value={values.project1}
-                    onChange={handleInput}
-                  />
-                  <br />
-                  <InputControl
-                    placeholder="Line 3"
-                    name="project2"
-                    value={values.project2}
-                    onChange={handleInput}
-                  />
-                </Form.Group>
-                <br />
-
-                <Form.Group as={Col} controlId="Languages">
-                  <Form.Label>Languages</Form.Label>
-
-                  <InputControl
-                    placeholder="Line 1"
-                    name="languages"
-                    value={values.languages}
-                    onChange={handleInput}
-                  />
-                  <br />
-                  <InputControl
-                    placeholder="Line 2"
-                    name="languages1"
-                    value={values.languages1}
-                    onChange={handleInput}
-                  />
-                  <br />
-                  <InputControl
-                    placeholder="Line 3"
-                    name="languages2"
-                    value={values.languages2}
-                    onChange={handleInput}
-                  />
-                </Form.Group>
-                <br />
-
-                <Form.Group className="mb-3" controlId="Summary">
-                  <Form.Label>Your Summary</Form.Label>
-                  <FloatingLabel controlId="floatingTextarea2" label="Summary">
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Leave a comment here"
-                      style={{ height: "100px" }}
-                      name="summary"
-                      value={values.summary}
-                      onChange={handleInput}
-                    />
-                  </FloatingLabel>
-                </Form.Group>
-              </Form>
-            </div>
-          </div>
-          <Button onClick={handleSubmit} class="btn btn-primary w-100 mt-4 rounded-pill" type="button">
-                  Save
-                </Button>
-          </form>
-        </div>
-      </section>
+                </FloatingLabel>
+              </Form.Group>
+              <Button
+                onClick={(e)=>{hundelUpdateProfile({haveCv:true}) ; handleSubmit(e)}}
+                className="btn btn-primary w-100 mt-4 rounded-pill"
+                type="button"
+              >
+                Save
+              </Button>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
   );

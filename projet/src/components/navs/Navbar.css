@@ -5,3 +5,10 @@
 .nav_col{
   text-align: justify;
   }
+
+  .myImg{
+    text-align:center;
+    margin-block-end: auto;
+    margin-block-start: auto;
+    margin-right: 10pc;
+  }

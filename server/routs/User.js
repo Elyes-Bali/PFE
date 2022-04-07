@@ -4,7 +4,7 @@ const User = require("../models/userShema");
 const isAuth = require("../middleware/authenticate");
 const express = require("express");
 const router = express.Router();
-
+const multer = require("multer");
 
 
 
@@ -13,14 +13,15 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     // Get body or Data
-    const {username, email, password,role} = req.body;
-    console.log(username, email, password,role)
+    const {username, email, password,role,pic} = req.body;
+    console.log(username, email, password,role,pic)
 
     const createUser = new User({
       username,
       email,
       password,
-      role
+      role,
+      pic  
     });
 
     // Save Method is Used to Create User or Insert User
@@ -66,5 +67,18 @@ router.post("/login", async (req, res) => {
 router.get("/auth", isAuth(), (req, res) => {
   res.status(200).send({user : req.user})
 });
+
+router.put("/update/:id" , async(req,res) => {
+  console.log(req.body)
+  try{
+    const result= await User.findByIdAndUpdate({_id:req.params.id},{$set:{...req.body}})
+    res.send("user updated")
+  }catch(error){
+      res.status(400).send({message:"No user with this id"})
+  }
+}, )
+
+
+
 
 module.exports = router;

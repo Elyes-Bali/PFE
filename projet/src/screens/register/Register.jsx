@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Swal from "sweetalert2";
+import Footer from "../../components/footer/Footer";
 
 const Register = () => {
 
@@ -13,7 +14,8 @@ const Register = () => {
     username : "",
     email : "",
     password : "",
-    role : ""
+    role : "",
+    pic : ""
   });
 
   //Handle Input
@@ -68,6 +70,9 @@ const Register = () => {
     }
   }
 
+    
+
+
   return (
     <div>
       <div className="container shadow my-5">
@@ -95,7 +100,7 @@ const Register = () => {
                   Username
                 </label>
                 <input
-                  placeholder="write ur name"
+                  placeholder="username"
                   type="text"
                   class="form-control"
                   id="name"
@@ -111,6 +116,7 @@ const Register = () => {
                   Email address
                 </label>
                 <input
+                  placeholder="email"
                   type="email"
                   class="form-control"
                   id="exampleInputEmail1"
@@ -125,10 +131,11 @@ const Register = () => {
               </div>
 
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">
+                <label for="exampleInputPassword1" class="form-label" >
                   Password
                 </label>
                 <input
+               
                   type="password"
                   class="form-control"
                   id="exampleInputPassword1"
@@ -138,10 +145,12 @@ const Register = () => {
                 />
               </div>
 
-              Role
+              
               <div  >
-                
-               <select class="form-control"  onChange={handleInput } name="role" >
+              <label for="InputRole" class="form-label" >
+                  Role
+                  </label>
+               <select class="form-control"   onChange={handleInput } name="role" >
                  <option>--SELECT--</option>
                  <option  value="clt">CLIENT</option>
                  <option  value="dev">FREELANCER</option>
@@ -160,6 +169,28 @@ const Register = () => {
                    I Agree Terms And Conditions
                 </label>
               </div>
+
+              <div className=" mb-3">
+                <div className="row">
+                    <form>
+                        
+                        <div className="form-group">
+                            <input type="file" 
+                            name="pic"
+                            id ="picture"
+                            accept="image/*"
+                            class="form-control"
+                            value={user.pic}
+                            onChange={handleInput } 
+                            
+                            />
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+
+
               <button onClick={handelCheck} type="button" class="btn btn-primary w-100 mt-4 rounded-pill">
                 Register
               </button>
@@ -167,6 +198,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -1,14 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 const Navsbar = () => {
+  const [user,setUser]=useState({})
   const token = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("isAdmin");
+  const isDev = localStorage.getItem("isDev");
+  const isClient = localStorage.getItem("isClient");
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("isDev");
+    localStorage.removeItem("isClient");
   };
+
+
+  const isLoggedIn = async () => {
+    const options = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+    try {
+      const res = await axios.get("/api/user/auth", options);
+      setUser(res.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(()=>{
+    isLoggedIn();
+  },[])
   return (
     <div>
       <Navbar bg="light shadow" expand="lg">
@@ -38,6 +62,7 @@ const Navsbar = () => {
                   comunity
                 </NavLink>
               </li>
+              {isClient && (
               <li className="nav-item">
                 <NavLink
                   to="/Offers"
@@ -47,15 +72,19 @@ const Navsbar = () => {
                   Offers
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/Profile"
-                  className="nav-links"
-                  style={{ marginLeft: ".6rem" }}
-                >
-                  Profile
-                </NavLink>
-              </li>
+              )}
+              {isDev && (
+                <li className="nav-item">
+                  <NavLink
+                    to={user.haveCv?"/profilee":"/Profile"}
+                    className="nav-links"
+                    style={{ marginLeft: ".6rem" }}
+                  >
+                    Resume
+                  </NavLink>
+                </li>
+              )}
+
               <li className="nav-item">
                 <NavLink
                   to="/Profil"
@@ -65,37 +94,39 @@ const Navsbar = () => {
                   Profile
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink
+                  to="/Create"
+                  className="nav-links"
+                  style={{ marginLeft: ".6rem" }}
+                >
+                  Create
+                </NavLink>
+              </li>
             </Nav>
-            <NavLink className="navbar-brand fw-bolder fs-4 mx-auto" to="/">
-              <img
-                src="/images/transparent.png"
-                width="195"
-                height={50}
-                style={{ marginRight: "11rem" }}
-              />
-            </NavLink>
-            </Navbar.Collapse>
-            {/* here */}
-            {!token ? (
-              <>
-                <NavLink
-                  to="/login"
-                  className="btn btn-outline-primary ms-auto px-4 rounded-pill"
-                >
-                  <i className="fa fa-sign-in me-2"></i>
-                  Login
-                </NavLink>
-                <NavLink
-                  to="/register"
-                  className="btn btn-outline-primary ms-2 px-4 rounded-pill"
-                >
-                  <i className="fa fa-user-plus me-2"></i>
-                  Register
-                </NavLink>
-              </>
-            ) : (
-              <>
-               {isAdmin &&
+          
+          </Navbar.Collapse>
+          {/* here */}
+          {!token ? (
+            <>
+              <NavLink
+                to="/login"
+                className="btn btn-outline-primary ms-auto px-4 rounded-pill"
+              >
+                <i className="fa fa-sign-in me-2"></i>
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="btn btn-outline-primary ms-2 px-4 rounded-pill"
+              >
+                <i className="fa fa-user-plus me-2"></i>
+                Register
+              </NavLink>
+            </>
+          ) : (
+            <>
+              {isAdmin && (
                 <NavLink
                   to="/dashboard"
                   className="btn btn-outline-primary ms-2 px-4 rounded-pill"
@@ -103,18 +134,17 @@ const Navsbar = () => {
                   <i className="fa fa-user-plus me-2"></i>
                   Dashboard
                 </NavLink>
-                }
-                <NavLink
-                  onClick={handleLogout}
-                  to="/logout"
-                  className="btn btn-outline-primary ms-2 px-4 rounded-pill"
-                >
-                  <i className="fa fa-sign-out me-2"></i>
-                  Logout
-                </NavLink>
-              </>
-            )}
-          
+              )}
+              <NavLink
+                onClick={handleLogout}
+                to="/logout"
+                className="btn btn-outline-primary ms-2 px-4 rounded-pill"
+              >
+                <i className="fa fa-sign-out me-2"></i>
+                Logout
+              </NavLink>
+            </>
+          )}
         </Container>
       </Navbar>
     </div>

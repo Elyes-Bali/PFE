@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 //CV Schema Or Document Structure
 const cvSchema = new mongoose.Schema({
     userId : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "userShema"
+        type : String,
+        
         
     },
 
@@ -62,7 +62,8 @@ const cvSchema = new mongoose.Schema({
     summary : {
         type : String,
       
-    }
-})
+    },
+    images : [Object] 
+},{timestamps:true});
 
 module.exports = CvInfo =  mongoose.model("CV", cvSchema);

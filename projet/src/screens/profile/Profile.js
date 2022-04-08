@@ -70,7 +70,7 @@ const Profile = () => {
 
   const hundelUpdate = async () => {
     const config = { headers: { "Content-Type": "application/json" } };
-    const res = await axios.put("/api/user/update", user, config);
+    const res = await axios.put(`/api/user/update/${user._id}`, user, config);
   };
 
   return (

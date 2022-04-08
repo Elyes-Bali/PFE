@@ -41,17 +41,32 @@ const ResumeUpdate = () => {
     setUpdate({ ...update, [name]: value });
   };
   
-
-
+  const isLoggedIn = async () => {
+    const options = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }; 
+    try {
+      const res = await axios.get("/api/user/auth", options);
+      setUser(res.data.user);
+    //   getAllCvs();
+    //   verify();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(user);
   const getCv = async () => {
     try {
       const res = await axios.get(`/api/res/${user._id}`);
+      
       setUpdate(res.data.cv);
-
-      console.log(res.data)
-    } catch (error) {} 
+      
+      console.log(res.data)  
+    } catch (error) {}   
   }; 
-
+ 
   const uploadFileHandler = async () => {
     setUpdate({ ...update, images: [] });
     // console.log(multipleFiles)
@@ -86,21 +101,7 @@ const ResumeUpdate = () => {
 //         }
 //     }
 // }
-  const isLoggedIn = async () => {
-    const options = {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    }; 
-    try {
-      const res = await axios.get("/api/user/auth", options);
-      setUser(res.data.user);
-    //   getAllCvs();
-    //   verify();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
   useEffect(() => {
     getCv(); 
    isLoggedIn();   

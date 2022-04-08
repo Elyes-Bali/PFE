@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Resume.css";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { CurrentUser } from "../../apis/UserApi";
 
 const Resumee = () => {
   const navigate = useNavigate();
@@ -42,47 +43,26 @@ const Resumee = () => {
   };   
 
   const isLoggedIn = async () => {
-    const options = { 
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    };
-    try {
-      const res = await axios.get("/api/user/auth", options);
-      setUser(res.data.user);
-      setValues({ ...values, userId: res.data.user._id });
-      // setValues({...values,userId:res.data.user._id})
-      // console.log(user);
-      // const user = res.data.user
-      // return user
-      // console.log(res.data.user)
-    } catch (error) {
-      console.log(error);
-    }
+   const CrtUser = await CurrentUser();
+  
+      setUser(CrtUser.data.user);
+      setValues({ ...values, userId: CrtUser.data.user._id });
+              
+         
+    
   };
-
+  console.log(values);
+ 
   const handleSubmit = async () => {
-    //Object DeStructuring
-    //Store Object Data into Variables
+    
 
     const config = { headers: { "Content-Type": "application/json" } };
     try {
-      //It is Submitted on port 3000 by default
-      //wich os Front end But we need to
-      //Submit it on Backend which is on
-      // Port 3001. So we need Proxy
+    
 
       const res = await axios.post("/api/res/resume", values, config);
 
       alert(`${res.data.msg}`);
-
-      // if (res.status === 400 || !res){
-      //   window.alert("Already Filled")
-      // }else{
-      //   //You need to Restart the server for Proxy Works
-      //   window.alert("Saved Successfully");
-      //   navigate('/profile')
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +97,7 @@ const Resumee = () => {
 
   const hundelUpdateProfile = async (userr) => {
     const config = { headers: { "Content-Type": "application/json" } };
-    const res = await axios.put(`/api/user/update/${user._id}`, userr, config);
+    const res = await axios.put(`/api/user/update/${user._id}`, user, config);
 
    
   };

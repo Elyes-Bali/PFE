@@ -4,8 +4,7 @@ import { Routes, Route} from "react-router-dom";
 import Home from "./screens/home/Home";
 import Profile from "./screens/profile/Profile";
 import Offers from "./screens/offers/Offers";
-import Comunity from "./screens/comunity/Comunity";
-import Footer from "./components/footer/Footer";
+
 import Login from "./screens/login/Login";
 import Register from "./screens/register/Register";
 import Dashboard from "./screens/dashboard/Dashboard";
@@ -21,6 +20,7 @@ import Devpage from "./screens/devpage/Devpage";
 import CreateOffers from "./screens/offers/CreateOffers";
 import axios from "axios";
 import ResumeUpdate from "./screens/resume/ResumeUpdate";
+import { CurrentUser } from "./apis/UserApi";
 
 
 
@@ -41,50 +41,25 @@ function App() {
   const [listcvs, setListcvs] = useState([]);
 
   const isLoggedIn = async () => {
-    let opts ={
-      headers:{
-        Authorization:localStorage.getItem("token"),
-      },
-    };
-    try {
-      const res = await fetch('/api/user/auth',opts, {
-        method : "GET",
-        headers : {
-          Accept : "application/json",
-          "Content-Type" : "application/json",
-         
-        },
-        
-        credentials : "include"
-      });
-      
-      if(res.status === 200){
+    const data = CurrentUser()
+      if(data.status === 200){
         setauth(true)
         setauth1(false)
       }
-      if(res.status === 401){
+      if(data.status === 401){
         setauth(false)
         setauth1(true)
       }
 
-    } catch (error) {
-      console.log(error)
-    }
-  }
+    } 
+  
 
 
-  const getAllCvs = async () => {
-    try {
-      const res = await axios.get("/api/res/getallcv");
-      setListcvs(res.data.result);
-
-      // console.log(res.data.result)
-    } catch (error) {}
-  };  
+  
 
   useEffect(() => {
     isLoggedIn();
-    getAllCvs();
+    
   }, []);
 
 

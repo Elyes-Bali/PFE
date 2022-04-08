@@ -75,7 +75,7 @@ router.put("/update" , async(req,res) => {
 router.get("/:id", async(req,res)=>{
   console.log(req.params.id)
   try {
-    const result = await CvInfo.findOne({userd:req.params.id})
+    const result = await CvInfo.findOne({userId:req.params.id})
     return res.status(200).send({cv:result})
   } catch (error) {
     console.log(error)

@@ -26,7 +26,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const config = { headers: { "Content-Type": "application/json" } };
-   
+
     // const {email, password}= user;
     try {
       const res = await axios.post("/api/user/login", user, config);
@@ -34,12 +34,8 @@ const Login = () => {
       console.log(res.data.searchedUser);
       if (res.data.searchedUser.role === "dev") {
         localStorage.setItem("isDev", res.data.searchedUser.role);
-        setTimeout(() => {
-          window.location.reload();
-          navigate("/");
-        }, 3000);
-        
-       
+        navigate("/");
+        window.location.reload();
       }
       if (res.data.searchedUser.role === "clt") {
         localStorage.setItem("isClient", res.data.searchedUser.role);

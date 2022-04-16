@@ -1,49 +1,34 @@
+import { Avatar } from "@chakra-ui/react";
 import React from "react";
-import { Button, Card, Carousel } from "react-bootstrap";
+import { Button, Card, Carousel, ModalTitle } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './Devcard.css';
-const Devcard = () => {
+const Devcard = ({dev}) => {
+  console.log(dev)
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card  style={{ width: "20rem" , margin:"1%" }}>
       <Carousel>
-        <Carousel.Item>
+        {dev?.images?.map((el)=> <Carousel.Item>
           <img
             className="d_block"
-            src="images/img-9.jpg"
+            src={el.filePath}
             alt="First slide"
             width="640" height="360"
           />
           
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d_block"
-            src="images/img-4.jpg"
-            alt="Second slide"
-            width="640" height="360"
-          />
-
-          
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d_block"
-            src="images/img-5.jpg"
-            alt="Third slide"
-            width="10" height="10"
-          />
-
-          
-        </Carousel.Item>
+        </Carousel.Item>)}
+       
       </Carousel>
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+      <Avatar className="avatar" size="md" cursor="pointer" name={dev?.name} src={dev?.pic}/>
+      <ModalTitle>{dev?.name}</ModalTitle>
+        
+        
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Link to="/Profil">
-        <Button variant="primary">Learn More</Button>
+          {dev?.summary?.substring(0,65)}...
+        </Card.Text><br/>
+        <Link to={`/dev/${dev._id}`} state={{ dev: dev }}>
+        <Button variant="primary">Visit</Button>
         </Link>
       </Card.Body>
     </Card>

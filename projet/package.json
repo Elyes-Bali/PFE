@@ -6,10 +6,11 @@
     "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.7",
     "@cometchat-pro/chat": "^3.0.6",
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.9.0",
+    
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+  
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -30,7 +31,6 @@
     "styled-components": "^5.3.3",
     "sweetalert2": "^11.4.4",
     "web-vitals": "^2.1.4"
-    
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,14 +45,10 @@
     ]
   },
   "browserslist": [
-   
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    
-    
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
   ],
-  
   "devDependencies": {
     "sass": "^1.49.10"
   },

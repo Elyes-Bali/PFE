@@ -15,7 +15,7 @@ const Register = () => {
     email : "",
     password : "",
     role : "",
-    pic : ""
+    pic : "",
   });
 
   //Handle Input
@@ -79,7 +79,7 @@ const Register = () => {
         <div className="row justify-content-end">
           <div
             className="col-md-5 d-flex flex-column
-                 align-items-center text-white justify-content-center form order-2"
+                 align-items-center text-white justify-content-center formm order-2"
           >
             <h1 className="display-4 fw-bolder">Hello , Friend</h1>
             <p className="lead text-center">Enter Your Details To Register</p>
@@ -169,26 +169,6 @@ const Register = () => {
                    I Agree Terms And Conditions
                 </label>
               </div>
-
-              <div className=" mb-3">
-                <div className="row">
-                    <form>
-                        
-                        <div className="form-group">
-                            <input type="file" 
-                            name="pic"
-                            id ="picture"
-                            accept="image/*"
-                            class="form-control"
-                            value={user.pic}
-                            onChange={handleInput } 
-                            
-                            />
-                        </div>
-                        
-                    </form>
-                </div>
-            </div>
 
 
               <button onClick={handelCheck} type="button" class="btn btn-primary w-100 mt-4 rounded-pill">

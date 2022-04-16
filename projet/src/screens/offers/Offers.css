@@ -7,3 +7,15 @@
     );
     min-height: 500px;
   }
+  .free{
+    font-style:italic;
+    
+  }
+  .iclg{
+    height: 100px !important;
+    width: 80px !important;
+  }
+  .iclg2{
+    height: 100px !important;
+  }
+  

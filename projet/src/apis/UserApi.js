@@ -27,4 +27,50 @@ export const CurrentUser = async () => {
   }
 };
 
+export const GetAllDev = async () => {
+  
+  try {
+    const res = await axios.get("/api/user/alldev");
+     
+    return res.data.devs;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const GetAllClt = async () => {
+  
+  try {
+    const res = await axios.get("/api/user/allclt");
+     
+    return res.data.clts;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const GetAllUsers = async () => {
+  
+  try {
+    const res = await axios.get("/api/user/allusers");
+     
+    return res.data.allusers;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export  const hundelUpdate = async (id,user) => {
+  const config = { headers: { "Content-Type": "application/json" } };
+  try {
+    const res = await axios.put(
+      `/api/user/update/${id}`,
+      user,
+      config
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 

@@ -82,6 +82,16 @@ router.get("/:id", async(req,res)=>{
   }
 })
 
+router.put("/edite/:id" , async(req,res) => {
+  console.log(req.body)
+  try{
+    const result= await CvInfo.findByIdAndUpdate({_id:req.params.id},{$set:{...req.body}})
+    res.send("offer updated")
+  }catch(error){
+      res.status(400).send({message:"No offer with this id"})
+  }
+}, )
+
 
 
 

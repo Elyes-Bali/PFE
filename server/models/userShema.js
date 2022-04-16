@@ -24,8 +24,10 @@ const userSchema = new mongoose.Schema({
 
   pic: {
     type: String,
-    default:
-      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  },
+  authorize: {
+    type: Boolean,
+    default: true,
   },
   phone: {
     type: Number,
@@ -39,18 +41,53 @@ const userSchema = new mongoose.Schema({
   zip: {
     type: String,
   },
-  haveCv:{
-    type:Boolean,
-    default:false ,
-  }
-  // tokens : [
-  //     {
-  //         token : {
-  //             type : String,
-  //             required : true
-  //         }
-  //     }
-  // ]
+  adress: {
+    type: String,
+  },
+
+  name: {
+    type: String,
+  },
+  title: {
+    type: String,
+  },
+  linkedin: {
+    type: String,
+  },
+  github: {
+    type: String,
+  },
+  phone: {
+    type: Number,
+  },
+  age: {
+    type: Number,
+  },
+  project: {
+    type: String,
+  },
+  project1: {
+    type: String,
+  },
+  project2: {
+    type: String,
+  },
+  languages: {
+    type: String,
+  },
+  languages1: {
+    type: String,
+  },
+  languages2: {
+    type: String,
+  },
+  college: {
+    type: String,
+  },
+  summary: {
+    type: String,
+  },
+  images: [Object],
 });
 
 // Hashing Password to Secure

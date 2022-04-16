@@ -12,3 +12,12 @@
     margin-block-start: auto;
     margin-right: 10pc;
   }
+  .active{
+    color: blue;
+    background-color: #babbbc76;
+   
+    border-radius: 25%;
+    font-weight: bold;
+    font-size: 15px;
+
+  }

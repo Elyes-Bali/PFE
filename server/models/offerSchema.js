@@ -1,9 +1,29 @@
 const mongoose = require('mongoose');
 
 const offerSchema = new mongoose.Schema({
-    userId : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "userShema"
+    createdbyId : {
+        type : String,
+        
+        
+    },
+    createdbyName : {
+        type : String,
+        
+        
+    },
+    donebyId : {
+        type : String,
+        
+        
+    },
+    donebyName : {
+        type : String,
+        
+        
+    },
+    postuledby : {
+        type : Array,
+        
         
     },
     prjectname : {
@@ -29,5 +49,5 @@ const offerSchema = new mongoose.Schema({
         default : false 
     }
   
-},{timestamps:true});
+},);
 module.exports = OfferInfo =  mongoose.model("OFFER", offerSchema);

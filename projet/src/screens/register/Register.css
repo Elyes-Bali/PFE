@@ -3,3 +3,10 @@
     padding: 10px;
     
 }
+
+.formm{
+    background: rgb(27, 110, 204);
+    background: linear-gradient(90deg, rgb(39, 121, 214) 30%, rgb(142, 195, 206)
+    100%);
+    min-height: 500px;
+  }

@@ -24,8 +24,7 @@ const Services = ({id1}) => {
                     <i className="fa fa-cogs fa-4x mb-4 text-primary"></i>
                   <h5 className="card-title mb-3 fs-4 fw-bold">Building</h5>
                   <p className="card-text lead">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  We help you create your own project at the best price
                   </p>
                 </div>
               </div>
@@ -38,8 +37,7 @@ const Services = ({id1}) => {
                     <i className="fa fa-mobile fa-4x mb-4 text-primary"></i>
                   <h5 className="card-title mb-3 fs-4 fw-bold">Full responsive layout</h5>
                   <p className="card-text lead">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  With Flexible layouts, graphics, and media queries in a cascading style sheet
                   </p>
                 </div>
               </div>
@@ -52,8 +50,7 @@ const Services = ({id1}) => {
                     <i className="fa fa-users fa-4x mb-4 text-primary"></i>
                   <h5 className="card-title mb-3 fs-4 fw-bold">Users Experience</h5>
                   <p className="card-text lead">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Provide you with the best user experience in every aspect
                   </p>
                 </div>
               </div>
@@ -69,8 +66,7 @@ const Services = ({id1}) => {
                     <i className="fa fa-laptop fa-4x mb-4 text-primary"></i>
                   <h5 className="card-title mb-3 fs-4 fw-bold">Creative Web Design</h5>
                   <p className="card-text lead">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Allowing you to enjoy the most beautiful web design
                   </p>
                 </div>
               </div>
@@ -83,8 +79,7 @@ const Services = ({id1}) => {
                     <i className="fa fa-file-code-o fa-4x mb-4 text-primary"></i>
                   <h5 className="card-title mb-3 fs-4 fw-bold">Unique and clean</h5>
                   <p className="card-text lead">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Using various languages to create unique, tidy scripts
                   </p>
                 </div>
               </div>
@@ -97,8 +92,7 @@ const Services = ({id1}) => {
                     <i className="fa fa-star-half-o fa-4x mb-4 text-primary"></i>
                   <h5 className="card-title mb-3 fs-4 fw-bold">Creative Ideas</h5>
                   <p className="card-text lead">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Finding the most innovative and unique ideas for you
                   </p>
                 </div>
               </div>
@@ -107,7 +101,7 @@ const Services = ({id1}) => {
 
         </div>
       </section>
-      <Footer/>
+      
     </div>
   );
 };

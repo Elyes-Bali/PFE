@@ -104,7 +104,7 @@ const Resumee = () => {
 
   return (
     <div>
-      <section id="Resume">
+      {/* <section id="Resume">
         <div className="container my-5 py-5">
           <div className="row">
             <div className="col-md-6">
@@ -123,7 +123,7 @@ const Resumee = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* here */}
       <div className="container shadow my-5">
         <Tabs variant="soft-rounded" colorScheme="red">

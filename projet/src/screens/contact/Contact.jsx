@@ -49,7 +49,8 @@ const Contact = ({id}) => {
         setMsg({
           name : "",
           email : "",
-          message : ""
+          message : "",
+          
         })
         
       }
@@ -85,7 +86,7 @@ const Contact = ({id}) => {
                     type="text"
                     className="form-control"
                     id="name"
-                    placeholder="Elyes"
+                    placeholder="User Name"
                     name="name"
                     value={msg.name}
                     onChange ={handleChange}

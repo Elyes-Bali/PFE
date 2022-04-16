@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import { Avatar } from "@chakra-ui/react";
+
 const Navsbar = () => {
   const [user,setUser]=useState({})
   const token = localStorage.getItem("token");
@@ -46,6 +48,7 @@ const Navsbar = () => {
             >
               <li>
                 <NavLink
+                activeclassname= "active"
                   to="/"
                   className="nav-links"
                   style={{ marginLeft: ".3rem" }}
@@ -55,6 +58,7 @@ const Navsbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                 activeClassName= "active"
                   to="/Comunity"
                   className="nav-links"
                   style={{ marginLeft: ".6rem" }}
@@ -62,28 +66,31 @@ const Navsbar = () => {
                   comunity
                 </NavLink>
               </li>
+
+              
               {isClient && (
               <li className="nav-item">
                 <NavLink
-                  to="/Offers"
+
+                  to="/Create"
                   className="nav-links"
                   style={{ marginLeft: ".6rem" }}
                 >
-                  Offers
+                  Create
                 </NavLink>
               </li>
               )}
-              {isDev && (
+              
                 <li className="nav-item">
                   <NavLink
-                    to={user.haveCv?"/profilee":"/Profile"}
+                    to="/Offers"
                     className="nav-links"
                     style={{ marginLeft: ".6rem" }}
                   >
-                    Resume
+                    Offers
                   </NavLink>
                 </li>
-              )}
+              
 
               <li className="nav-item">
                 <NavLink
@@ -94,19 +101,13 @@ const Navsbar = () => {
                   Profile
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  to="/Create"
-                  className="nav-links"
-                  style={{ marginLeft: ".6rem" }}
-                >
-                  Create
-                </NavLink>
-              </li>
+              
             </Nav>
           
           </Navbar.Collapse>
+          
           {/* here */}
+          
           {!token ? (
             <>
               <NavLink
@@ -135,6 +136,7 @@ const Navsbar = () => {
                   Dashboard
                 </NavLink>
               )}
+              <Avatar className="avatar" size="md" cursor="pointer" name={user.name} src={user.pic} />
               <NavLink
                 onClick={handleLogout}
                 to="/logout"

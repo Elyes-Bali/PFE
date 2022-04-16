@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../components/footer/Footer";
-
+import './Login.css';
 const Login = () => {
   const navigate = useNavigate();
 
@@ -39,51 +39,19 @@ const Login = () => {
       }
       if (res.data.searchedUser.role === "clt") {
         localStorage.setItem("isClient", res.data.searchedUser.role);
-        navigate("/profil");
+        navigate("/");
         window.location.reload();
       }
       if (res.data.searchedUser.isAdmin.toString() === "true") {
         localStorage.setItem("isAdmin", res.data.searchedUser.isAdmin);
       }
 
-      // if (res.data.searchedUser.role ==='dev'){
-      //   localStorage.setItem("isDEv", res.data.searchedUser.isAdmin);
-      // }
-      // if (res.data.searchedUser.role) {
-      //   navigate("/profile");
-      //   window.location.reload();
-      // }
-      // //  localStorage.setItem("isDev",res.data.searchedUser.role);
-
-      // if ( JSON.stringify(res.data.searchedUser.role) =='dev') {
-      //    localStorage.setItem(
-      //     "isDev",
-      //   true
-
-      //   );
-      // }
+      
       if (res.data.searchedUser.isAdmin) {
         navigate("/dashboard");
         window.location.reload();
       }
-      // navigate('/')
-
-      // JSON.parse(localStorage.getItem('key'));
-      // if (res.data.searchedUser.role.toString() === 'clt'){localStorage.setItem("isClient",res.data.searchedUser.role)};
-      // if(res.data.searchedUser.role.toString() === 'clt'){
-      //   navigate('/profil');
-      //   window.location.reload()
-      // }
-
-      // {
-      //   method : "POST",
-      //
-      //   body : JSON.stringify({
-      //     email, password
-      //   })
-      // }
-
-      // console.log(res.data.token);
+    
     } catch (error) {
       const { errors, msg } = error.response.data;
       if (Array.isArray(errors)) {
@@ -92,8 +60,7 @@ const Login = () => {
       if (msg) {
         alert(msg);
       }
-      // if (res.status === 400 || !res) {
-      //   window.alert("Invlid Credentials");}
+     
       console.log(error);
     }
   };
@@ -104,7 +71,7 @@ const Login = () => {
         <div className="row">
           <div
             className="col-md-5 d-flex flex-column
-                 align-items-center text-white justify-content-center form"
+                 align-items-center text-white justify-content-center formm"
           >
             <h1 className="display-4 fw-bolder">Welcome Back</h1>
             <p className="lead text-center">

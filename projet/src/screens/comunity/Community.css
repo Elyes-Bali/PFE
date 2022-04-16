@@ -1,11 +1,83 @@
 .App {
-    font-family: sans-serif;
-    text-align: center;
-  }
-.container{
+  font-family: sans-serif;
+  text-align: center;
+}
+.container {
   margin: auto;
-  margin-top:3%;
+  margin-top: 3%;
+
+  justify-content: space-between;
+}
+.mainSection {
+  display: flex;
  
- justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+}
+.contentBox {
+  margin-left: 2%;
+  width: 40%;
+
+  padding-left: 1rem;
+}
+.contentBox h1 {
+  font-size: 2.5rem;
+  color: #301934;
+}
+.contentBox p {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  font-family: "Poppins", sans-serif;
+  font-style: italic;
+  
+}
+.btnBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3rem;
+}
+.btnn {
+  border: 8px solid transparent;
+  border-radius: 10rem;
+  background-image: linear-gradient(#fff, #fff),
+    radial-gradient(circle at bottom right, purple, orange);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  margin-right: 0%;
+}
+.text {
+  font-size: 1.2rem;
+  padding: 0.5em 1.5rem;
+  color: #c91fe8;
+}
+.imgContainer{
+  width: 50%;
+  
+}
+.imgContainer img{
+  width: 90%;
+ margin: 0 auto;
+ display: block;
+}
+.bgcol{
+  background-color: rgb(236, 241, 241);
+}
+.flex{
+
+  flex-wrap: wrap;
+  padding: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.cardres{
+  display: grid !important;
+  margin-top: -26px !important;
+  position: absolute !important;
+  width: 38% !important;
+  border: 17px solid transparent;
+  border-radius: 10rem;
+  margin-left: 6px;
 }
 

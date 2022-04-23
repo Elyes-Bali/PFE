@@ -19,11 +19,31 @@ const ClienDB = () => {
   return (
     <div>
       <SideBar />
-      <div className="content-wrapper">
-        <div className="card">
-          <div className="card-header border-transparent">
-            <div className="card-body p-0">
-              <div className="table-responsive">
+      <div className="ctn">
+      <div className="content-wrapper cadre">
+        <div className="card cdr w3-hover-shadow">
+          <div className="card-header">
+            <h5 className="card-title">
+                Offers and Budgets
+            </h5>
+            <div className="card-tools">
+              <button
+                type="button"
+                className="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i className="fas fa-minus" />
+              </button>
+              <button
+                type="button"
+                className="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i className="fas fa-times" />
+              </button>
+            </div>
+          </div>
+          <div className="card-body">
                 <Table striped bordered hover>
                   <thead className="txt">
                     <tr>
@@ -40,7 +60,7 @@ const ClienDB = () => {
                         <td>{el.username}</td>
                         <td>{el.email}</td>
                         <td>
-                          <Button onClick={()=>hundelUpdate(el._id,{authorize:!el.authorize})} variant="danger">
+                          <Button onClick={()=>{hundelUpdate(el._id,{authorize:!el.authorize});window.location.reload()}} variant="danger">
                             {el.authorize ? "Blocke User":"Active User"}
                           </Button>
                         </td>
@@ -53,7 +73,7 @@ const ClienDB = () => {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 };
 

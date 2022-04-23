@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Col, Form, Row, FloatingLabel } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { CurrentUser } from "../../apis/UserApi";
 import "./Profile.css";
 import {
@@ -9,18 +9,18 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Textarea,
+  
 } from "@chakra-ui/react";
 import InputControl from "../profiledev/InputControl";
-import { Link, useNavigate } from "react-router-dom";
-import background from "../image/cv.jpg";
-var navStyle = {
-  height: "100%",
-  backgroundImage: `url(${background})`,
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "cover",
-};
+import { useNavigate } from "react-router-dom";
+// import background from "../image/cv.jpg";
+// var navStyle = {
+//   height: "100%",
+//   backgroundImage: `url(${background})`,
+//   backgroundPosition: "center",
+//   backgroundRepeat: "no-repeat",
+//   backgroundSize: "cover",
+// };
 
 
 const Profile = () => {
@@ -60,7 +60,7 @@ const Profile = () => {
     setMultipleFiles(e.target.files);
   };
 
-  useEffect(async () => {
+  useEffect( () => {
     isLoggedIn();
   }, []);
   console.log(user);
@@ -124,7 +124,7 @@ const hundelRemove = (idx)=>{
   
 
   return (
-    <div style={navStyle}>
+    <div id='Profile'>
       <section>
         <div className="container pill shadow my-5 py-5">
           <div className="row">
@@ -171,7 +171,8 @@ const hundelRemove = (idx)=>{
                   <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Label className="px-2">Username:</Form.Label>
                     <input
-                      className="form-control"
+                      className="form-control eml"
+                      disabled={true}
                       type="text"
                       value={user?.username}
                       onChange={(e) =>
@@ -191,6 +192,7 @@ const hundelRemove = (idx)=>{
                         setUser({ ...user, phone: e.target.value })
                       }
                       placeholder="Phone Number"
+                     
                     />
                   </Form.Group>
                 </Row>
@@ -198,7 +200,8 @@ const hundelRemove = (idx)=>{
                 <Form.Group className="mb-3" controlId="formGridAddress1">
                   <Form.Label>Email</Form.Label>
                   <input
-                    className="form-control w-100"
+                    className="form-control eml w-100"
+                    disabled={true}
                     type="text"
                     value={user?.email}
                     onChange={(e) =>

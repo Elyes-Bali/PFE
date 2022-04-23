@@ -40,11 +40,19 @@ const offerSchema = new mongoose.Schema({
         type : String,
         
     },
+    duree : {
+        type : String,
+        
+    },
     date :{
         type : Date,
         default: Date.now()
     },
     isAffectted:{
+        type : Boolean,
+        default : false 
+    },
+    isCompleted:{
         type : Boolean,
         default : false 
     }

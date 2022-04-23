@@ -19,6 +19,7 @@ const CreateOffers = () => {
     prjectname: "",
     budget: "",
     detail: "",
+    duree:"",
   });
 
   const isLoggedIn = async () => {
@@ -90,6 +91,19 @@ const CreateOffers = () => {
                 </NumberInputStepper>
               </NumberInput>
               <br />
+              <Form.Label>Duration</Form.Label>
+              <Form.Control
+                className="form-control "
+                type="text"
+                placeholder="How much long it gonna take"
+                value={create?.duree}
+                onChange={(e) =>
+                  setCreate({ ...create, duree: e.target.value })
+                }
+              />
+              <br />
+
+
               <Form.Label>Detail your needs precisely</Form.Label>
               <Form.Control
                 as="textarea"

@@ -5,7 +5,7 @@ const offerSchema = require("../models/offerSchema");
 router.post("/create", async (req, res) => {
   try {
     // Get body or Data
-    const { createdbyId, createdbyName, prjectname, budget, detail } = req.body;
+    const { createdbyId, createdbyName, prjectname, budget, detail,duree } = req.body;
     // console.log(name,email,title,linkedin,github,phone,project,project1,project2,
     //   languages,languages1,languages2,college,summary)
 
@@ -15,6 +15,7 @@ router.post("/create", async (req, res) => {
       prjectname,
       budget,
       detail,
+      duree,
     });
 
     const created = await createofferSchema.save();
@@ -89,5 +90,16 @@ router.get('/getone/:id', async(req,res)=>{
 }
 })
 
+router.get('/getoffers/:id', async(req,res)=>{
+  
+  try {
+  const result = await offerSchema.find({createdbyId:req.params.id});
+  // console.log(result);
+  res.status(200).send({gtofers : result});
+  }catch (error) {
+    res.status(400).send({ message: "No offer with this id" });
+  
+}
+})
 
 module.exports = router;

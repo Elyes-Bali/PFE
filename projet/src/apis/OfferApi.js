@@ -5,7 +5,7 @@ export const GetAllOff = async () => {
   
     try {
       const res = await axios.get("/api/offer/alloff");
-       console.log(res.data.offers)
+      //  console.log(res.data.offers)
       return res.data.offers;
     } catch (error) {
       console.log(error);
@@ -59,6 +59,20 @@ export const GetAllOff = async () => {
         offrr,
         config
       );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  export const Getoff = async (id) => {
+  
+    try {
+      const config = { headers: { "Content-Type": "application/json" } };
+      const result = await axios.get(`/api/offer/getoffers/${id}`,config);
+      //  console.log(res.data.offers)
+      console.log(result.data.gtofers)
+      return result.data.gtofers;
+      
     } catch (error) {
       console.log(error);
     }

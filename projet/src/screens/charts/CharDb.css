@@ -1,0 +1,25 @@
+.cht {
+  width: 90%;
+  height: 500px;
+  align-items: center;
+  display: flex;
+  justify-self: center;
+  margin-left: 6%;
+}
+.cdr {
+  margin-top: 1%;
+  margin-left: 1%;
+  width: 100%;
+
+  padding: 1px 20px;
+
+  display: flex;
+  justify-content: center;
+}
+.cadre {
+  height: 100px !important;
+  width: 82%;
+}
+.ctn {
+  width: 100%;
+}

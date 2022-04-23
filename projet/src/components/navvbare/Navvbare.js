@@ -147,12 +147,14 @@ const Navvbare = () => {
                 <>
                   <li>
                     <a className="dropdown-item" href="/login">
+                    <i className="fa fa-sign-in" aria-hidden="true"/>&nbsp;
                       Login
                     </a>
                   </li>
 
                   <li>
                     <a className="dropdown-item" href="/register">
+                    <i className="fa fa-user-plus" aria-hidden="true"/>&nbsp;
                       Registre
                     </a>
                   </li>
@@ -162,34 +164,48 @@ const Navvbare = () => {
                   {isAdmin && (
                     <li>
                       <a className="dropdown-item" href="/dashboard">
+                      <i className="fa fa-tachometer" aria-hidden="true"/>&nbsp;
                         Dashboard
                       </a>
                     </li>
                   )}
 
                   <li>
+                 
                     <a
+                    
                       className="dropdown-item"
                       onClick={handleLogout}
                       href="/logout"
-                    >
+                    > <i className="fa fa-sign-out" aria-hidden="true"/>&nbsp;
                       Logout
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="/Profil">
+                    <i className="fa fa-cog" aria-hidden="true"/>&nbsp;
                       Settings
                     </a>
                   </li>
-                  {isDev && (
+                  {isDev && (<>
                   <li>
                   <Link to={`/dev/${user._id}`} state={{ dev: user }}>
                     <a className="dropdown-item" >
-                    
+                    <i className="fa fa-user" aria-hidden="true"/>&nbsp;
                       My Profile
                     </a>
                     </Link>
-                  </li>)}
+                  </li>
+
+                    <li>
+                    
+                      <a href="/devof" className="dropdown-item" >
+                      <i className="fa fa-bookmark-o" aria-hidden="true"/>&nbsp;
+                        My Offers
+                      </a>
+                    
+                    </li>
+                  </>)}
                 </>
               )}
             </ul>

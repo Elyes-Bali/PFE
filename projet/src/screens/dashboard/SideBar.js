@@ -28,21 +28,7 @@ const SideBar = () => {
             </div>
           </div>
           {/* SidebarSearch Form */}
-          <div className="form-inline">
-            <div className="input-group" data-widget="sidebar-search">
-              <input
-                className="form-control form-control-sidebar"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <div className="input-group-append">
-                <button className="btn btn-sidebar">
-                  <i className="fas fa-search fa-fw" />
-                </button>
-              </div>
-            </div>
-          </div>
+       
           {/* Sidebar Menu */}
           <nav className="mt-2">
             <ul
@@ -103,17 +89,19 @@ const SideBar = () => {
                 </a>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <a href="pages/charts/chartjs.html" className="nav-link">
+                  <Link to="/chart">
+                    <a  className="nav-link">
                       <i className="far fa-circle nav-icon" />
-                      <p>ChartJS</p>
-                    </a>
+                      <p>Offers Budgets</p>
+                    </a></Link>
                   </li>
 
                   <li className="nav-item">
-                    <a href="pages/charts/uplot.html" className="nav-link">
+                  <Link to="/chausers">
+                    <a  className="nav-link">
                       <i className="far fa-circle nav-icon" />
-                      <p>uPlot</p>
-                    </a>
+                      <p>Users</p>
+                    </a></Link>
                   </li>
                 </ul>
               </li>
@@ -151,10 +139,11 @@ const SideBar = () => {
                 </a>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <a href="pages/mailbox/mailbox.html" className="nav-link">
+                    <Link to="/messdb">
+                    <a  className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Inbox</p>
-                    </a>
+                    </a></Link>
                   </li>
                 </ul>
               </li>

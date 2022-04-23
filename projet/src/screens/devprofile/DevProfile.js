@@ -1,34 +1,96 @@
 import React, { useEffect, useState } from "react";
 import "./DevProfile.css";
 import { useLocation } from "react-router-dom";
-import { Button, Table } from "react-bootstrap";
+import { Button, Card, Form, Table } from "react-bootstrap";
 import { GetAllOff } from "../../apis/OfferApi";
 import { CurrentUser } from "../../apis/UserApi";
+
+import { GetAllCom } from "../../apis/Comments";
+import axios from "axios";
+import { Getoff } from "../../apis/OfferApi";
 
 const DevProfile = () => {
   const location = useLocation();
   const { dev } = location.state;
-  console.log(dev);
+  // console.log(dev);
   const [offer, setOffer] = useState([]);
+  const [useroffer, setUseroffer] = useState([]);
+ 
+ 
   const [user, setUser] = useState({});
+  const [test, setTest] = useState(false);
   const token = localStorage.getItem("token");
+
+
   const isOffer = async () => {
     const oflg = await GetAllOff();
     setOffer(oflg);
+   
   };
+  const [comm, setComm] = useState([]);
+
+  const [create, setCreate] = useState({
+    name: "",
+    comment: "",
+    devId: "",
+    writedbyid: "",
+  });
 
   const isUser = async () => {
     const AllUser = await CurrentUser();
 
     setUser(AllUser.data.user);
+    setCreate({
+      ...create,
+      name: AllUser.data.user.username, 
+      writedbyid: AllUser.data.user._id,
+      devId: dev._id,
+    });
+    isUseroffer(user._id)  
   };
 
-  useEffect(() => {
+  const isComment = async () => {
+    const userLg = await GetAllCom();
+    setComm(userLg);
+    
+  };
+
+  const isUseroffer = async (id) => {
+    const userLg = await Getoff(id);
+    setUseroffer(userLg);
+    useroffer.filter((el)=>{ 
+          if (el.donebyId === dev._id) { 
+           setTest(true);
+          }    
+      })  
+      console.log(test)   
+  };
+ 
+  const handleSubmit = async () => {   
+    const config = { headers: { "Content-Type": "application/json" } };
+    try {
+      const res = await axios.post("/api/comment/addcom", create, config);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => { 
+    
     isOffer();
     isUser();
-  }, []);
-  console.log(offer);
-
+    isComment();       
+    
+    
+     
+    
+  }, [user]);  
+  console.log(useroffer);   
+  // console.log(comm);
+  // console.log(user);
+ 
+ 
+  
   return (
     <div className="body">
       <div>
@@ -43,7 +105,7 @@ const DevProfile = () => {
         <section className="about" id="about">
           <h1 className="heading">
             {" "}
-            <span>about</span> me{" "}
+            <span>about me</span> {" "}
           </h1>
 
           <div className="second">
@@ -82,9 +144,10 @@ const DevProfile = () => {
         <section className="education" id="education">
           <h1 className="heading">
             {" "}
-            My <span>Work</span>{" "}
+             <span>My Work</span>{" "}
           </h1>
-          <div className="box-container">
+        
+          <div className="box-container shadow">
             <div className="box">
               <i className="fas fa-graduation-cap" />
               <span>-- My Projects --</span>
@@ -106,15 +169,17 @@ const DevProfile = () => {
             {" "}
             <span>Work On</span>{" "}
           </h1>
-          <div className="box-container">
+          
+          <div className="box-container shadow">
             <div className="box">
-              <i className="fas fa-graduation-cap" />
+              <i className="fas fa-handshake-o" />
               <div>
                 <Table>
                   <thead class="thead-light">
                     <tr>
                       <th>Project Title</th>
                       <th>Client</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
 
@@ -125,6 +190,7 @@ const DevProfile = () => {
                         <tr>
                           <td class="table-light">{el.prjectname}</td>
                           <td class="table-light">{el.createdbyName}</td>
+                          <td class="table-light">{el.isCompleted ?(<div>Completed</div>):(<div>Not Completed !</div>)}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -134,10 +200,12 @@ const DevProfile = () => {
           </div>
         </section>
 
+        
+
         <section className="portfolio" id="portfolio">
           <h1 className="heading">
             {" "}
-            my <span>portfolio</span>{" "}
+             <span>my portfolio</span>{" "}
           </h1>
           <div className="box-container">
             {dev.images.map((el) => (
@@ -148,10 +216,65 @@ const DevProfile = () => {
           </div>
         </section>
 
+        <section className="education" id="education">
+          <h1 className="heading">
+            {" "}
+            <span>Comments</span>{" "}
+          </h1>
+          <div className="box-container">
+           
+            <div>
+              <div className="container shadow box clr ">
+                <Form>
+                  <div>
+                    <Card>
+                      <Card.Header as="h5">Comments</Card.Header>
+                      {comm
+                        .filter((el) => el.devId === dev._id)
+                        .map((el) => (
+                          <>
+                            <Card.Title>{el.name}</Card.Title>
+                            <div>{el.comment}</div>
+                          </>
+                        ))}
+                    </Card>
+                  </div>
+                  {test&&
+                      <>      
+                        <Form.Group
+                          className="mb-3 "
+                          controlId="exampleForm.ControlTextarea1"
+                        >
+                          <Form.Control
+                            value={create?.comment}
+                            onChange={(e) =>
+                              setCreate({ ...create, comment: e.target.value })
+                            }
+                            placeholder="Your Comment"
+                            as="textarea"
+                            rows={1}
+                          />
+                        </Form.Group>
+                        <Button onClick={handleSubmit} variant="success">
+                          {" "}
+                          Send
+                        </Button>
+                      </>
+                    
+                  }
+                </Form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+
         <section className="contact" id="contact">
           <h1 className="heading">
             {" "}
-            <span>contact</span> me{" "}
+            <span>contact me</span> {" "}
           </h1>
           <div className="row">
             <div className="content">

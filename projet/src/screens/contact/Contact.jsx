@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const Contact = ({id}) => {
@@ -19,32 +20,17 @@ const Contact = ({id}) => {
   }
 
 
-   // Handle Submit
-   const handleSubmit = async (event)=>{
-    event.preventDefault();
-    // Object DeStructuring
-    // Store Object Data into Variables
-    const {name, email, message} = msg;
+
+   const handleSubmit = async (e)=>{
+    e.preventDefault();
     try {
-      //It is Submitted on port 3000 by default
-      // Which is Front End but we need to 
-      // Submit it on Backend which is on 
-      // Port 3001. So we need Proxy.
-      const res = await fetch('/message', {
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
-          name, email, message
-        })
-      })
+      const res = await axios.post('/api/message/create',msg)
+
       console.log(res.status)
       if(res.status === 400 || !res){
         window.alert("Message Not Sent. Try Again Later")
       }else{
-        // You need to Restart the Server for Proxy Works
-        // Now Try Again
+       
         window.alert("Message Sent");
         setMsg({
           name : "",
@@ -77,7 +63,7 @@ const Contact = ({id}) => {
               <img src="/images/img-11.jpg" alt="Contact" className="w-75" />
             </div>
             <div className="col-md-6">
-              <form onSubmit={handleSubmit} method="POST">
+              
                 <div className="mb-3">
                   <label for="name" className="form-label">
                     Your Name
@@ -121,10 +107,10 @@ const Contact = ({id}) => {
                     onChange ={handleChange}
                   ></textarea>
                 </div>
-                <button type="submit" className="btn btn-outline-primary rounded-pill px-4">Send Message
+                <button type="button" onClick={(e)=>handleSubmit(e)} className="btn btn-outline-primary rounded-pill px-4">Send Message
                   <i className="fa fa-paper-plane ms-2"></i>
                 </button>
-              </form>
+              
             </div>
           </div>
         </div>

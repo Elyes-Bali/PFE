@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import axios from "axios";
-import { GetAllOff } from "../../apis/OfferApi";
+
 
 const ModalCl = ({offrr,keey}) => {
   const [offer, setOffer] = useState({});
@@ -49,6 +49,15 @@ const ModalCl = ({offrr,keey}) => {
               placeholder="Budget"
               value={offer?.budget}
               onChange={(e) => setOffer({ ...offer, budget: e.target.value })}
+            />
+          </Form.Group>
+          <br />
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="Duration"
+              value={offer?.duree}
+              onChange={(e) => setOffer({ ...offer, duree: e.target.value })}
             />
           </Form.Group>
           <br />

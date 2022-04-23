@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { GetAllOff } from "../../apis/OfferApi";
-
+import Jump from 'react-reveal/Jump';
 import OffCard from "./OffCard";
 import "./Offers.css";
+import Modal from "./Modal";
 
 const Offers = () => {
   const [offer, setOffer] = useState([]);
@@ -27,11 +28,13 @@ const Offers = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-8 mt-5">
+            <Jump>
               <h1 className="display-4  fw-bolder mb-4 text-center text-white">
-                Find available freelancers
+                 <Modal/>
                 <br />
-                <i className="fa fa-arrow-down" aria-hidden="true"></i>
+               
               </h1>
+              </Jump>
             </div>
           </div>
         </div>
@@ -47,7 +50,7 @@ const Offers = () => {
                
                 className="mr-4"
                 src="./images/simple.jpg"
-              ></img></div>
+              ></img></div>&nbsp;
               <div>
                 <h3 className="display-9 h5 font-weight-semibold text-dark">
                   Simple
@@ -65,7 +68,7 @@ const Offers = () => {
                 
                 className="mr-4"
                 src="./images/rapide.jpg"
-              ></img></div>
+              ></img></div>&nbsp;
               <div>
                 <h3 className="display-9 h5 font-weight-semibold text-dark">
                   Fast
@@ -81,7 +84,7 @@ const Offers = () => {
                
                 className="mr-4"
                 src="./images/free.jpg"
-              ></img></div>
+              ></img></div>&nbsp;
               <div>
                 <h3 className="display-9 h5 font-weight-semibold text-dark">
                   Free
@@ -100,9 +103,9 @@ const Offers = () => {
           <div className="row">
             <div className="container  shadow col-md-4">
               <div className="free ctr">
+
                 <h6 className="display-5 h5 fint-weight-semibold mb-2 text-dark">
                   Find a freelancer
-                  {/* {offer.map((el)=><p>{el.date}</p>)} */}
                 </h6>
                 <p>
                   <b>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import Devcard from "../../components/devcard/Devcard";
 import "./Community.css";
-
+import RubberBand from 'react-reveal/RubberBand';
 import { CurrentUser, GetAllDev } from "../../apis/UserApi";
-
+import Fade from 'react-reveal/Fade';
 import { Card, CardGroup } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { Link, Navigate } from "react-router-dom";
@@ -56,6 +56,7 @@ const isUser = async () => {
     <div className="bgcol">
       <div className="mainSection">
         <div className="contentBox">
+        <Fade left big>
           <h1 className="text-bold">Our Community</h1>
           <p>
             A whole world of freelance talent at your fingertips{" "}
@@ -63,7 +64,7 @@ const isUser = async () => {
             <br />
             Find the perfect freelance services for your business !
           </p>
-         
+          </Fade>
             <div>
               <div className="btnn rounded-pill">
                 <Input
@@ -96,13 +97,11 @@ const isUser = async () => {
       <div className="container py-4">
         <div className="row">
           <div className="col-12 mb-5">
-            <h1
-              
-              className="display-6 fw-bolder
-            text-center"
-            >
+          <RubberBand>
+            <h1 className="display-6 fw-bolder text-center">
               Our Feelancers <i className="fa fa-arrow-down" aria-hidden="true"></i>
             </h1>
+            </RubberBand>
             <br />
             <hr />
           </div>

@@ -16,7 +16,7 @@ const OffCard = ({ off }) => {
     isLoggedIn();
   }, []);
   return (
-    <div>
+    <div>{!off.isCompleted &&
       <Card style={{ width: "55rem", margin: "1%" }}>
         <Card.Body>
           <ModalTitle>{off.prjectname}</ModalTitle>
@@ -52,7 +52,9 @@ const OffCard = ({ off }) => {
           <br />
           <Card.Text>{off.detail.substring(0, 300)}...</Card.Text>
           <br />
-          <Card.Text>Posted At :{off.date.substring(0, 10)}</Card.Text>
+          <Card.Text><b>Duration :</b>{off.duree}</Card.Text>
+          <br />
+          <Card.Text><b>Posted At :</b>{off.date.substring(0, 10)}</Card.Text>
           <br />
           {user.role === "dev" && (
             <Link to={`/detail/${off._id}`} state={{ off: off }}>
@@ -60,7 +62,7 @@ const OffCard = ({ off }) => {
             </Link>
           )}
         </Card.Body>
-      </Card>
+      </Card>}
     </div>
   );
 };

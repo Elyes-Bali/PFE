@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import {  Table } from "react-bootstrap";
 import { GetAllOff } from "../../apis/OfferApi";
 import SideBar from "./SideBar";
 
@@ -18,12 +18,31 @@ const OffersDb = () => {
   return (
     <div>
       <SideBar />
-      <div className="content-wrapper">
-        <div>
-          <div className="card">
-            <div className="card-header border-transparent">
-              <div className="card-body p-0">
-                <div className="table-responsive">
+      <div className="ctn">
+      <div className="content-wrapper cadre">
+        <div className="card cdr w3-hover-shadow">
+          <div className="card-header">
+            <h5 className="card-title">
+                Offers and Budgets
+            </h5>
+            <div className="card-tools">
+              <button
+                type="button"
+                className="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i className="fas fa-minus" />
+              </button>
+              <button
+                type="button"
+                className="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i className="fas fa-times" />
+              </button>
+            </div>
+          </div>
+          <div className="card-body">
                   <Table striped bordered hover>
                     <thead className="txt">
                       <tr>
@@ -37,7 +56,7 @@ const OffersDb = () => {
                         <tr>
                           <td>{el.prjectname}</td>
                           <td>{el.createdbyName}</td>
-                          <td>{el.donebyName}</td>
+                          <td>{el.donebyName}</td>    
                         </tr>
                       ))}
                     </tbody>
@@ -47,8 +66,7 @@ const OffersDb = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      
   );
 };
 

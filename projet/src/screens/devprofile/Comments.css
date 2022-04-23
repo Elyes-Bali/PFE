@@ -1,0 +1,8 @@
+.clr{
+   
+    position: fixed;
+}
+.bttn{
+    display: flex;
+    justify-content: left;
+}

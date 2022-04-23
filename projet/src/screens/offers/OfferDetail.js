@@ -37,9 +37,7 @@ const OfferDetail = () => {
     const Useroffer = await Getone(offer._id);
     setOffer(Useroffer);
     setTest(true);
-    // setTimeout(()=>{
-    //   window.location.reload()
-    // },1000)
+ 
     console.log(offer);
   };
 
@@ -48,9 +46,7 @@ const OfferDetail = () => {
     const Useroffer = await Getone(offer._id);
     setOffer(Useroffer);
     setTest(false);
-    // setTimeout(()=>{
-    //   window.location.reload()
-    // },1000)
+   
     console.log(offer);
   };
 
@@ -69,7 +65,7 @@ const OfferDetail = () => {
       </div>
       <div className="crt2">
         <div className="crt3">
-          <Card style={{ width: "55rem", height: "55rem" }}>
+          <Card style={{ width: "55rem", height: "65rem" }}>
             <Card.Body>
               <ModalTitle>
                 <b>{offer?.prjectname}</b>
@@ -82,7 +78,9 @@ const OfferDetail = () => {
                 {offer?.budget}
               </Card.Text>
               <br />
-              <Card.Text className="txt">{offer?.detail}...</Card.Text>
+              <Card.Text className="txt"><b>Duration :</b>{offer?.duree}</Card.Text>
+              <br />
+              <Card.Text className="txt">{offer?.detail}</Card.Text>
               <br />
               <Card.Text className="date">
                 <b>Date :</b>
@@ -92,6 +90,7 @@ const OfferDetail = () => {
             </Card.Body>
           </Card>
         </div>
+        {offer?.donebyId!=user._id &&
         <div className="crt4">
           <Card style={{ width: "20rem", height: "30rem" }}>
             <Card.Body className="itm">
@@ -140,7 +139,7 @@ const OfferDetail = () => {
               )}
             </Card.Body>
           </Card>
-        </div>
+        </div>}
       </div>
     </div>
   );

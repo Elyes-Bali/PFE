@@ -43,13 +43,7 @@ const PostuledBy = ({ offrr, dev, key }) => {
   useEffect(() => {
     setOffer(offrr);
     Filter();
-    // setListdev(
-    //   offer?.postuledby?.filter((obj) =>
-    //     dev?.map(( e ) => obj._id === e._id)
-    //   )
-    // );
-
-    
+ 
   }, [dev, offer._id, offrr]);
 
 

@@ -23,6 +23,10 @@ import ClientProfile from "./screens/client/ClientProfile";
 import ClienDB from "./screens/dashboard/ClienDB";
 import DevDb from "./screens/dashboard/DevDb";
 import OffersDb from "./screens/dashboard/OffersDb";
+import Messg from "./screens/dashboard/Messg";
+import ChartDb from "./screens/charts/ChartDb";
+import Chartusers from "./screens/charts/Chartusers";
+import DevOffers from "./screens/devprofile/DevOffers";
 
 
 function App() {
@@ -60,6 +64,10 @@ function App() {
         <Route path="/cltdb" element={<ClienDB />} />
         <Route path="/devdb" element={<DevDb />} />
         <Route path="/offdb" element={<OffersDb />} />
+        <Route path="/chart" element={<ChartDb />} />
+        <Route path="/chausers" element={<Chartusers/>} />
+        <Route path="/messdb" element={<Messg />} />
+        <Route path="/devof" element={<DevOffers />} />
       
         <Route path="/dev/:id" element={<DevProfile />} />
         <Route path="/detail/:id" element={<OfferDetail />} />

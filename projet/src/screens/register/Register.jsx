@@ -54,19 +54,26 @@ const Register = () => {
       console.log(error);
     }
   }
+  
 
   const handelCheck = (e) => {
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     e.preventDefault();
+
     if (!user.username || !user.email|| !user.password || !user.role ) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Something went wrong!',
-        footer: '<a href="">Why do I have this issue?</a>'
+        footer: 'Please check your informations !'
       })
       
-    }else {
-      handleSubmit()
+    }else  if (regEx.test(user.email)) {
+      handleSubmit();
+    } else if (!regEx.test(user.email) && user.email !== "") {
+      alert("Email is Not Valid");
+    
+
     }
   }
 
@@ -107,6 +114,7 @@ const Register = () => {
                   name="username"
                   value={user.username}
                   onChange={handleInput}
+                  min={4}
                 />
                 
               </div>

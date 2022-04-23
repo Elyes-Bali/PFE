@@ -1,23 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600&display=swap');
 
 :root{
-    --yellow:#f9ca24;
+    --yellow:#f96b24;
 }
 
-/* *{
-    font-family: 'Nunito', sans-serif;
-    margin:0; padding:0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none; border:none;
-    text-transform: capitalize;
-    transition: all .2s linear;
-}
 
-*::selection{
-    background:var(--yellow);
-    color:#333;
-} */
 
 .button{
     width: 100px;
@@ -25,25 +12,10 @@
     font-size: 15px !important;
 }
 
-/* html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-}
 
-html::-webkit-scrollbar{
-    width:1.4rem;
-}
-
-html::-webkit-scrollbar-track{
-    background:#222;
-}
-
-html::-webkit-scrollbar-thumb{
-    background:var(--yellow);
-} */
 
 .body{
-    background:#111;
+    background:#fbeee6;
     overflow-x: hidden;
     
 }
@@ -53,24 +25,7 @@ section{
     padding:1rem;
 }
 
-/* .btn{
-    padding:.7rem 3rem;
-    background:#333;
-    color:#fff;
-    cursor: pointer;
-    margin-top: 1rem;
-    font-size: 2rem;
-    border-radius: 5rem;
-}
 
-.btn i{
-    padding:0 .5rem;
-    font-size: 1.8rem;
-}
-
-.btn:hover{
-    background:var(--yellow);
-} */
 
 .heading{
     text-align: center;
@@ -110,12 +65,12 @@ header .user img{
 
 header .user .name{
     font-size: 3.5rem;
-    color:#fff;
+    color:rgb(0, 0, 0);
 }
 
 header .user .post{
     font-size: 2rem;
-    color:#eee;
+    color:rgb(0, 0, 0);
 }
 
 header .navbar{
@@ -133,7 +88,7 @@ header .navbar ul li a{
     padding:1rem;
     margin:1.5rem 0;
     background:#333;
-    color:#fff;
+    color:rgb(0, 0, 0);
     font-size: 2rem;
     border-radius: 5rem;
 }
@@ -146,7 +101,7 @@ header .navbar ul li a:hover{
     position: fixed;
     top:2rem; right:2rem;
     background:#333;
-    color:#fff;
+    color:rgb(0, 0, 0);
     cursor: pointer;
     font-size: 2.5rem;
     padding:1rem 1.5rem;
@@ -163,12 +118,12 @@ header .navbar ul li a:hover{
 
 .homeee h3{
     font-size: 2.5rem;
-    color:#fff;
+    color:rgb(0, 0, 0);
 }
 
 .homeee h1{
     font-size:5rem;
-    color:#fff;
+    color:rgb(0, 0, 0);
 }
 
 .homeee h1 span{
@@ -177,7 +132,7 @@ header .navbar ul li a:hover{
 
 .homeee p{
     font-size:2rem;
-    color:#eee;
+    color:rgb(0, 0, 0);
     padding: 1rem 0;
 }
 
@@ -208,7 +163,7 @@ header .navbar ul li a:hover{
 }
 
 .info h3 span{
-    color:#eee;
+    color:rgb(0, 0, 0);
     padding:0 .5rem;
 }
 
@@ -221,7 +176,7 @@ header .navbar ul li a:hover{
 
 .box{
     width:20rem;
-    background:#222;
+    background:#ffe5db;
     text-align: center;
     padding: 2rem;
     margin:2rem;
@@ -234,7 +189,7 @@ header .navbar ul li a:hover{
 
 .box h3{
     font-size: 2rem;
-    color:#fff;
+    color:rgb(0, 0, 0);
 }
 
 .box-container{
@@ -251,27 +206,27 @@ header .navbar ul li a:hover{
     width:85rem;
     margin:4rem 1rem;
     padding-left: 4rem;
-    border-left: .2rem solid #fff;
+    border-left: .2rem solid rgb(255, 255, 255);
     position: relative;
 }
 
 .education .box-container .box span{
     font-size: 1.3rem;
-    background:#222;
-    color:#fff;
+    background:rgb(198, 192, 192);
+    color:rgb(0, 0, 0);
     border-radius: 5rem;
     padding:.5rem 2.5rem;
 }
 
 .education .box-container .box h3{
     font-size: 2rem;
-    color:#fff;
+    color:rgb(0, 0, 0);
     padding-top: 1.5rem;
 }
 
 .education .box-container .box p{
     font-size: 1.4rem;
-    color:#eee;
+    color:rgb(255, 255, 255);
     padding: 1rem 0;
 }
 
@@ -339,7 +294,7 @@ header .navbar ul li a:hover{
     padding:1.5rem;
     margin:1rem 0;
     background:#3333;
-    color:#fff;
+    color:rgb(0, 0, 0);
     text-transform: none;
     font-size: 1.7rem;
     width:100%;
@@ -356,7 +311,7 @@ header .navbar ul li a:hover{
 
 .contact .row .content .title{
     text-transform: uppercase;
-    color:#fff;
+    color:rgb(0, 0, 0);
     font-size: 3rem;
     padding-bottom: 2rem;
 }
@@ -365,7 +320,7 @@ header .navbar ul li a:hover{
     display: flex;
     align-items: center;
     font-size: 2rem;
-    color:#eee;
+    color:rgb(0, 0, 0);
     padding:1rem 0;
     font-weight: normal;
 }
@@ -405,20 +360,6 @@ header .navbar ul li a:hover{
     align-items: center;
     padding-left: 1rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -495,9 +436,9 @@ header .navbar ul li a:hover{
    align-self: left;
  }
  .txtcl{
-    color: #eee !important;
+    color: rgb(0, 0, 0) !important;
  }
  .tbody{
-     color: #eee !important;
+     color: rgb(0, 0, 0) !important;
  }
  

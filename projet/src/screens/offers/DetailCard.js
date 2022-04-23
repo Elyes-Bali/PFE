@@ -20,6 +20,10 @@ const DetailCard = ({off}) => {
         <Card.Text>
           {off.detail.substring(0,300)}...
         </Card.Text><br/>
+        <Card.Text>
+          <b>Duration :</b>
+          {off.duree}
+        </Card.Text><br/>
         <Card.Text><b>Date :</b>
           {off.date.substring(0,10)}
         </Card.Text><br/>

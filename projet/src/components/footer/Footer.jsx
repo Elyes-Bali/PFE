@@ -19,17 +19,17 @@ const Footer = () => {
               <p>© 2022 Company, Inc. All rights reserved.</p>
               <ul className="list-unstyled d-flex">
                 <li className="ms-3">
-                  <NavLink className="link-light" to="#">
+                  <NavLink className="link-light" target="_blank" href="https://www.facebook.com">
                     <i className="fa fa-facebook fa-2x"></i>
                   </NavLink>
                 </li>
                 <li className="ms-3">
-                  <NavLink className="link-light" to="#">
+                  <NavLink className="link-light" target="_blank" href="https://www.instagram.com">
                     <i className="fa fa-instagram fa-2x"></i>
                   </NavLink>
                 </li>
                 <li className="ms-3">
-                  <NavLink className="link-light" to="#">
+                  <NavLink className="link-light" target="_blank" href="https://www.twitter.com">
                     <i className="fa fa-twitter fa-2x"></i>
                   </NavLink>
                 </li>

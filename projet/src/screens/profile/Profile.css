@@ -4,6 +4,17 @@
   width: 55%;
   
 }
+
+#Profile {
+  background: Orgb(0, 101, 219);
+  background: linear-gradient(
+    260deg,
+    rgb(232, 240, 247) 40%,
+    rgb(63, 207, 236) 90%
+  );
+  min-height: 500px;
+}
+
 .imggg{
   display: flex;
   align-items: center;
@@ -18,7 +29,8 @@
   border-radius: 40%;
   border: 1px solid black;
 }
-  
+
+
 
 .butt{
     position: flex;
@@ -52,4 +64,16 @@
 .pill{
   border:1px solid white;
   border-radius: 8%;
+}
+.eml{
+cursor: not-allowed;
+outline: none;
+}
+input[type=file] {
+  color: transparent !important;
+}
+input[type=file]::before {
+content: "Choose a picture";
+color: black;
+margin-right: 10px; 
 }

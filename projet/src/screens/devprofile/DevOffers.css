@@ -1,0 +1,10 @@
+.sss{
+    display: flex;
+    justify-content: center;
+  align-items: center;
+}
+.hhh{
+  display: flex;
+  justify-content: space-around;
+ 
+}

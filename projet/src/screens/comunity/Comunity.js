@@ -49,8 +49,8 @@ const isUser = async () => {
     isDevs();
     isUser();
   }, []);
-  console.log(listdev);
-  console.log(user);
+  // console.log(listdev);
+  // console.log(user);
 
   return (
     <div className="bgcol">

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Button, Card, Carousel, ModalTitle } from "react-bootstrap";
+import { Button, Card, ModalTitle } from "react-bootstrap";
 import "./OfferDetail.css";
 import { CurrentUser } from "../../apis/UserApi";
-import axios from "axios";
+
 import { ApplyOff, Removeapply } from "../../apis/OfferApi";
 import { Getone } from "../../apis/OfferApi";
-
+import Swal from "sweetalert2";
 const OfferDetail = () => {
   const [user, setUser] = useState({});
   const [offer, setOffer] = useState({});
@@ -39,20 +39,44 @@ const OfferDetail = () => {
     setTest(true);
  
     console.log(offer);
+    
+
+
   };
 
-  const hundelRemove =async  () => {
-     Removeapply(offer._id,apply);
-    const Useroffer = await Getone(offer._id);
-    setOffer(Useroffer);
-    setTest(false);
+  const hundelUpdate1 =()=>{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Confirm it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        hundelUpdate();
+        Swal.fire(
+          'Applayed!',
+          'Your Apply is successful.',
+          'success'
+        )
+      }
+    })
+  }
+
+  // const hundelRemove =async  () => {
+  //    Removeapply(offer._id,apply);
+  //   const Useroffer = await Getone(offer._id);
+  //   setOffer(Useroffer);
+  //   setTest(false);
    
-    console.log(offer);
-  };
+  //   console.log(offer);
+  // };
 
   useEffect(() => {
     isLoggedIn();
-    
+   
   }, [apply._id]);
 
   // console.log(test);
@@ -90,7 +114,7 @@ const OfferDetail = () => {
             </Card.Body>
           </Card>
         </div>
-        {offer?.donebyId!=user._id &&
+        {offer?.donebyId!=user._id && 
         <div className="crt4">
           <Card style={{ width: "20rem", height: "30rem" }}>
             <Card.Body className="itm">
@@ -110,7 +134,7 @@ const OfferDetail = () => {
                   {!offer?.isAffectted && !test && (
                     <>
                       <Button
-                        onClick={hundelUpdate}
+                        onClick={hundelUpdate1}
                         className="btcl"
                         variant="success"
                       >
@@ -121,13 +145,14 @@ const OfferDetail = () => {
                   {offer?.isAffectted && <p>Sorry Not Available</p>}
 
                   {test && (
-                    <Button
-                      onClick={hundelRemove}
-                      className="btcl"
-                      variant="success"
-                    >
-                      Cancel
-                    </Button>
+                    // <Button
+                    //   onClick={hundelRemove}
+                    //   className="btcl"
+                    //   variant="success"
+                    // >
+                    //   Cancel
+                    // </Button>
+                    <p>Waiting for Client Response</p>
                   )}
                 </div>
               ) : (

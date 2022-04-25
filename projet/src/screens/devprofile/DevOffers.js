@@ -1,127 +1,117 @@
 import React, { useEffect, useState } from "react";
 import { GetAllOff } from "../../apis/OfferApi";
 import { CurrentUser } from "../../apis/UserApi";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  position,
-  List,
-} from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { Card, ModalTitle } from "react-bootstrap";
-import PostuledBy from "../client/PostuledBy";
-import $ from 'jquery';
+import "./DevOffers.css";
 const DevOffers = () => {
-  const [offer, setOffer] = useState([]);    
+  const [offer, setOffer] = useState([]);
   const [list, setList] = useState([]);
   const [user, setUser] = useState({});
 
   const isOffer = async (id) => {
     const oflg = await GetAllOff();
     setOffer(oflg);
-     
-    offer?.filter((obj) =>
-      obj.postuledby.filter((el) => {
-        if (el._id === id) {        
-            // list.unshift(obj);
-           list.push(obj);    
-        }
-      }) 
-    );                 
-              
-              
-  };     
-
-  const isUser = async () => {    
+   var r=([])
+  offer?.filter((obj) =>
+      obj.postuledby.every((el) => {
+        if (el._id === id) {
+          // list.unshift(obj);
+          r.push(obj)
+          
+        }      
+      })     
+                        
+    );              
+    setList(r)  
+          
+  };    
+ 
+  const isUser = async () => {
     const AllUser = await CurrentUser();
 
-    setUser(AllUser.data.user); 
-  };
-//   const Filter = (id) => {
-//       setList([]);
-//     offer?.filter((obj) =>
-//       obj.postuledby.filter((el) => {
-//         if (el._id === id) {    
-//           list.push(obj);    
-//         }
-//       }) 
-//     );
-//   };        
+    setUser(AllUser.data.user);
     
-  useEffect(() => { 
-    isUser();    
+  };
+
+
+
+
+
+     
+
+  useEffect(() => {    
+    isUser();
     isOffer(user._id);
-    // setList([])
-    // Filter(user._id);     
-  }, [user._id]);    
-  console.log(list);  
+    
+    // setList([])  
+    // Filter(user._id);
+  }, [user]);
+  console.log(list);
   return (
     <div>
       <Tabs variant="soft-rounded" colorScheme="red">
         <TabList className=" justify-content-center">
           <Tab>
-            <i className="fa fa-address-card-o px-2" aria-hidden="true"></i>
+          <i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;
             Affected to Me
           </Tab>
           <Tab>
-            <i className="fa fa-upload ms-2 px-2"></i>Offers in Pending
+          <i class="fa fa-clock-o" aria-hidden="true"/>&nbsp;Offers in Pending
           </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <div>
-              <Card
-                style={{
-                  width: "55rem",
-                  margin: "1%",
-                  display: "flex",
-                  displayContent: "center",
-                }}
-              >
-                <Card.Body>
-                  {offer
-                    .filter((el) => el.donebyId === user._id)
-                    .map((el) => (
-                      <>
-                        <ModalTitle>{el.prjectname}</ModalTitle>
+          {offer
+                .filter((el) => el.donebyId === user._id)
+                .map((el) => (
+            <Card
+              style={{
+                width: "55rem",
+                margin: "1%",
+              }}
+            >
+              
+                  <Card.Body>
+                    <ModalTitle>{el.prjectname}</ModalTitle>
 
-                        <Card.Text>
-                          <b>Budget : $</b>
-                          {el.budget}
-                        </Card.Text>
-                        <br />
-                        <Card.Text>{el.detail}</Card.Text>
-                        <br />
-                        <Card.Text>
-                          <b>Duration :</b>
-                          {el.duree}
-                        </Card.Text>
-                        <br />
-                        <Card.Text>
-                          <b>Date :</b>
-                          {el.date.substring(0, 10)}
-                        </Card.Text>
-                        <br />
-                      </>
-                    ))}
-                </Card.Body>
-              </Card>
-            </div>
+                    <Card.Text>
+                      <b>Budget : $</b>
+                      {el.budget}
+                    </Card.Text>
+                    <br />
+                    <Card.Text>{el.detail}</Card.Text>
+                    <br />
+                    <Card.Text>
+                      <b>Duration :</b>
+                      {el.duree}
+                    </Card.Text>
+                    <br />
+                    <Card.Text>
+                      <b>Date :</b>
+                      {el.date.substring(0, 10)}
+                    </Card.Text>
+                    <br />
+                    <Card.Text>
+                    {el.isAffectted ?(<div><b>Status :</b> Is Affected</div>):(<div>Available !</div>)}
+                    </Card.Text>
+                  </Card.Body>
+                
+            </Card>))}
           </TabPanel>
           <TabPanel>
-            <div>
-              <Card
+            <div className="hhh row">
+            {list.map((el) => (
+              <Card     
                 style={{
                   width: "55rem",
                   margin: "1%",
-                  display: "flex",
-                  displayContent: "space-between",
+                  
                 }}
-              >
+                className="shadow sss"
+              >  
                 <Card.Body>
-                  {list.map((el) => (
+                     
                     <>
                       <ModalTitle>{el.prjectname}</ModalTitle>
 
@@ -141,11 +131,15 @@ const DevOffers = () => {
                         <b>Date :</b>
                         {el.date.substring(0, 10)}
                       </Card.Text>
+                      
                       <br />
+                      <Card.Text>
+                    {el.isAffectted ?(<div><b>Status :</b>Is Affected</div>):(<div><b>Status :</b>Available !</div>)}
+                    </Card.Text>
                     </>
-                  ))}
+                
                 </Card.Body>
-              </Card>
+              </Card>  ))}
             </div>
           </TabPanel>
         </TabPanels>

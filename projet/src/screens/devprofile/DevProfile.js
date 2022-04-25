@@ -12,7 +12,7 @@ import { Getoff } from "../../apis/OfferApi";
 const DevProfile = () => {
   const location = useLocation();
   const { dev } = location.state;
-  // console.log(dev);
+  // console.log(location);
   const [offer, setOffer] = useState([]);
   const [useroffer, setUseroffer] = useState([]);
  
@@ -63,7 +63,7 @@ const DevProfile = () => {
            setTest(true);
           }    
       })  
-      console.log(test)   
+      // console.log(test)   
   };
  
   const handleSubmit = async () => {   
@@ -85,7 +85,7 @@ const DevProfile = () => {
      
     
   }, [user]);  
-  console.log(useroffer);   
+  // console.log(useroffer);   
   // console.log(comm);
   // console.log(user);
  
@@ -160,6 +160,7 @@ const DevProfile = () => {
               <h3>{dev.languages}</h3>
               <h3>{dev.languages1}</h3>
               <h3>{dev.languages2}</h3>
+              
             </div>
           </div>
         </section>
@@ -246,7 +247,7 @@ const DevProfile = () => {
                           controlId="exampleForm.ControlTextarea1"
                         >
                           <Form.Control
-                            value={create?.comment}
+                            
                             onChange={(e) =>
                               setCreate({ ...create, comment: e.target.value })
                             }

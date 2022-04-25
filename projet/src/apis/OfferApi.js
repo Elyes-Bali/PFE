@@ -70,7 +70,7 @@ export const GetAllOff = async () => {
       const config = { headers: { "Content-Type": "application/json" } };
       const result = await axios.get(`/api/offer/getoffers/${id}`,config);
       //  console.log(res.data.offers)
-      console.log(result.data.gtofers)
+      // console.log(result.data.gtofers)
       return result.data.gtofers;
       
     } catch (error) {

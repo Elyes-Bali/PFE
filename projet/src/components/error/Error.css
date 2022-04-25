@@ -1,0 +1,9 @@
+.imm{
+ display: flex;
+ justify-content: center;
+ width: 880px !important;
+}
+
+.sze{
+    font-size: 32px!important;
+}

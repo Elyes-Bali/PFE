@@ -30,19 +30,17 @@ const isUser = async () => {
 
 
 
-  const searchItems = (searchValue) => {
-    // setSearchInput(searchValue);
-    if (searchInput !== "") {
-      const filteredData = listdev.filter((item) => {
-        return Object.values(item.name)
-          .join("")
-          .toLowerCase()
-          .includes(searchInput.toLowerCase());
-      });
-      setFilteredResults(filteredData);
-    } else {
-      setFilteredResults(listdev);
-    }
+
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value.toLowerCase());
+    const searchFruits = listdev.filter((el) => {
+      return (
+        el.name.toLowerCase().includes(e.target.value.toLowerCase()) 
+      
+      );
+    });
+    setFilteredResults(searchFruits);
   };
 
   useEffect(() => {   
@@ -70,12 +68,13 @@ const isUser = async () => {
                 <Input
                   icon="search"
                   placeholder="Search..."
-                  onChange={(e) => {setSearchInput(e.target.value); searchItems(searchInput)}}
+                  onChange={handleSearch}
+                  value={searchInput}
                 />
               </div>
             </div>
             <CardGroup className="cardres" itemsPerRow={3} style={{ marginTop: 20 }}>
-              {searchInput.length > 1 &&
+              {searchInput && filteredResults &&
                 filteredResults.map((item) => {
                   return (
                     <Card>

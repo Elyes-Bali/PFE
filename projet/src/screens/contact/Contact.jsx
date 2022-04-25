@@ -1,9 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { CurrentUser} from "../../apis/UserApi";
 const Contact = ({id}) => {
+  const [user,setUser]=useState({});
+  const isUser = async () => {
+    const AllUser = await CurrentUser();
 
-  
+    setUser(AllUser.data.user);
+  };
 
   const [msg, setMsg]= useState({
     name : "",
@@ -33,8 +37,7 @@ const Contact = ({id}) => {
        
         window.alert("Message Sent");
         setMsg({
-          name : "",
-          email : "",
+          
           message : "",
           
         })
@@ -44,6 +47,17 @@ const Contact = ({id}) => {
       console.log(error);
     }
   }
+
+
+  useEffect(() => {   
+    isUser();
+    setMsg({...msg,
+      name : user.username,
+      email :user.email,
+     
+       
+    })
+  }, [user._id]);
 
   return (
     <div id={id}>
@@ -75,7 +89,7 @@ const Contact = ({id}) => {
                     placeholder="User Name"
                     name="name"
                     value={msg.name}
-                    onChange ={handleChange}
+                   disabled
                   />
                 </div>
 
@@ -90,7 +104,7 @@ const Contact = ({id}) => {
                     placeholder="name@example.com"
                     name="email"
                     value={msg.email}
-                    onChange ={handleChange}
+                  disabled
                   />
                 </div>
 

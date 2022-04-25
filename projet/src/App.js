@@ -26,6 +26,7 @@ import ChartDb from "./screens/charts/ChartDb";
 import Chartusers from "./screens/charts/Chartusers";
 import DevOffers from "./screens/devprofile/DevOffers";
 import Protectedroute1 from "./components/routes/Protectedroute1";
+import Errorpage from "./components/error/Errorpage";
 
 function App() {
 
@@ -37,6 +38,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
+
+        <Route path="*" element={<Errorpage />} />
 
         <Route path="/Comunity" element={<Comunity />} />
         <Route element={<Cltroute />}>

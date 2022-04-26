@@ -2,6 +2,7 @@ import React from "react";
 
 const About = ({ id, id1 }) => {
   const isAdmin = localStorage.getItem("isAdmin");
+  const token = localStorage.getItem("token");
   return (
     <div>
       <section>
@@ -27,7 +28,7 @@ const About = ({ id, id1 }) => {
               >
                 Our Services
               </a>
-              {!isAdmin &&
+              {!isAdmin && token &&
               <a
                 href={`#${id}`}
                 className="btn btn-primary rounded-pill px-4 py-2 ms-2"

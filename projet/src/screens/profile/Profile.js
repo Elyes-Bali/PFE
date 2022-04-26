@@ -13,14 +13,7 @@ import {
 } from "@chakra-ui/react";
 import InputControl from "../profiledev/InputControl";
 import { useNavigate } from "react-router-dom";
-// import background from "../image/cv.jpg";
-// var navStyle = {
-//   height: "100%",
-//   backgroundImage: `url(${background})`,
-//   backgroundPosition: "center",
-//   backgroundRepeat: "no-repeat",
-//   backgroundSize: "cover",
-// };
+
 
 
 const Profile = () => {

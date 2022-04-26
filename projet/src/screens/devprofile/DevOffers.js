@@ -12,18 +12,18 @@ const DevOffers = () => {
   const isOffer = async (id) => {
     const oflg = await GetAllOff();
     setOffer(oflg);
-   var r=([])
+   var r=[]
   offer?.filter((obj) =>
-      obj.postuledby.every((el) => {
+      obj.postuledby.some((el) => {
         if (el._id === id) {
           // list.unshift(obj);
-          r.push(obj)
+        return  r.push(obj)
           
         }      
       })     
                         
     );              
-    setList(r)  
+    setList(r)      
           
   };    
  
@@ -32,13 +32,7 @@ const DevOffers = () => {
 
     setUser(AllUser.data.user);
     
-  };
-
-
-
-
-
-     
+  };     
 
   useEffect(() => {    
     isUser();
@@ -47,9 +41,9 @@ const DevOffers = () => {
     // setList([])  
     // Filter(user._id);
   }, [user]);
-  console.log(list);
+  // console.log(list);
   return (
-    <div>
+    <div id="devf"><br/>
       <Tabs variant="soft-rounded" colorScheme="red">
         <TabList className=" justify-content-center">
           <Tab>
@@ -61,7 +55,7 @@ const DevOffers = () => {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
+          <TabPanel className="sss">
           {offer
                 .filter((el) => el.donebyId === user._id)
                 .map((el) => (

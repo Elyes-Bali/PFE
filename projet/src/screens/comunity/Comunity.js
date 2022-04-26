@@ -51,7 +51,7 @@ const isUser = async () => {
   // console.log(user);
 
   return (
-    <div className="bgcol">
+    <div  id="cmnt">
       <div className="mainSection">
         <div className="contentBox">
         <Fade left big>

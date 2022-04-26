@@ -30,6 +30,7 @@ app.use("/api/res",require ('./routs/Cv') )
 app.use("/api/offer",require ('./routs/Offers') )
 app.use("/api/message", require('./routs/Message'))
 app.use("/api/comment", require('./routs/Comments'))
+app.use("/api/sendemail", require('./routs/RouteMessage'))
 
 
 // app.post("/upload", (req, res) => {

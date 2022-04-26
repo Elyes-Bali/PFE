@@ -8,3 +8,13 @@
   justify-content: space-around;
  
 }
+
+#devf{
+  background: Orgb(0, 101, 219);
+  background: linear-gradient(
+    900deg,
+    rgb(63, 207, 236) 30%,
+    rgb(255, 255, 255) 90%
+  );
+  min-height: 500px;
+}

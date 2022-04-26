@@ -27,6 +27,9 @@ import Chartusers from "./screens/charts/Chartusers";
 import DevOffers from "./screens/devprofile/DevOffers";
 import Protectedroute1 from "./components/routes/Protectedroute1";
 import Errorpage from "./components/error/Errorpage";
+import Checkemail from "./components/fgpassword/Checkemail";
+import PasswordRes from "./components/fgpassword/PasswordRes";
+
 
 function App() {
 
@@ -40,6 +43,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
 
         <Route path="*" element={<Errorpage />} />
+        <Route path="/check" element={<Checkemail />} />
+        <Route path="/passres" element={<PasswordRes />} />
 
         <Route path="/Comunity" element={<Comunity />} />
         <Route element={<Cltroute />}>

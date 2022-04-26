@@ -3,6 +3,7 @@ import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import './Login.css';
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -19,8 +20,7 @@ const Login = () => {
     setUser({ ...user, [name]: value });
   };
 
-  // Problem here : can't register new user and can't login to other users,
-  //only admin can login othors can't
+
 
   //Handle Login
   const handleSubmit = async (event) => {
@@ -104,7 +104,7 @@ const Login = () => {
                   onChange={handleChange}
                 />
                 <div id="emailHelp" className="form-text">
-                  We'11 never share your email with anyone else.
+                  We'll never share your email with anyone else.
                 </div>
               </div>
               <div className="mb-3">
@@ -119,6 +119,9 @@ const Login = () => {
                   value={user.password}
                   onChange={handleChange}
                 />
+              </div>
+              <div>
+            <NavLink to="/check"> <h5 className="mb-4">forgot password ?</h5></NavLink>
               </div>
               <div className="mb-3 form-check">
                 <input

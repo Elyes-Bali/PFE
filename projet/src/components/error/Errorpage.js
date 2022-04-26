@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import './Error.css';
 const Errorpage = () => {
   return (
-    <div>
+    <div id="ttt">
         <div>
       <section>
         <div className="container my-5 py-5">
@@ -14,14 +14,15 @@ const Errorpage = () => {
                 <b>Not Found</b> 
               </h1>
               <hr />
-              <p className="lead mb-5 sze">
-                Sorry but this page dosen't existe , please press this button to return to home page.
-              <br/>  <b>Thank You</b>
+              <p className="lead mb-6 sze">
+               Oops! Looks like something wrong.<br/>
+               We are working on it.
+              <br/>  <b>Sorry</b>
               </p>
             <Button variant="info" href='/'>Home</Button>
             </div>
             <div className="col-md-6 imm">
-              <img src="/images/error.jpg" alt="About" className="w-75 mt-5" />
+              <img src="/images/erro.png" alt="About" className="w-75 mt-5" />
             </div>
             
           </div>

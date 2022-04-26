@@ -74,7 +74,7 @@ const Contact = ({id}) => {
           </div>
           <div className="row">
             <div className="col-md-6">
-              <img src="/images/img-11.jpg" alt="Contact" className="w-75" />
+              <img src="/images/ctn.jpg" alt="Contact" className="w-85" />
             </div>
             <div className="col-md-6">
               

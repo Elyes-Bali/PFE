@@ -4,7 +4,7 @@ export const GetAllMess = async () => {
   
     try {
       const res = await axios.get("/api/message/allmess");
-       console.log(res.data.mesg)
+      //  console.log(res.data.mesg)
       return res.data.mesg;
     } catch (error) {
       console.log(error);

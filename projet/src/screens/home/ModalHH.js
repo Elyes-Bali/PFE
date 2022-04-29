@@ -12,7 +12,7 @@ const Modal = () => {
           { opacity: 0, color: 'rgb(255, 255, 255)' },
         ]}>
         {styles => (
-          <animated.div style={styles}>Feels the Fresh Business Perspective</animated.div>
+          <animated.div style={styles}>Feel the Fresh Business Perspective</animated.div>
         )}
       </Spring>
 

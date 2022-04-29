@@ -8,7 +8,9 @@ import { CurrentUser } from "../../apis/UserApi";
 import { GetAllCom } from "../../apis/Comments";
 import axios from "axios";
 import { Getoff } from "../../apis/OfferApi";
-
+import Comments from "./Comments";
+import { Removcom } from "../../apis/Comments";
+import Swal from "sweetalert2";
 const DevProfile = () => {
   const location = useLocation();
   const { dev } = location.state;
@@ -35,6 +37,8 @@ const DevProfile = () => {
     devId: "",
     writedbyid: "",
   });
+
+ 
 
   const isUser = async () => {
     const AllUser = await CurrentUser();
@@ -70,10 +74,32 @@ const DevProfile = () => {
     const config = { headers: { "Content-Type": "application/json" } };
     try {
       const res = await axios.post("/api/comment/addcom", create, config);
+     
     } catch (error) {
       console.log(error);
     }
+    
   };
+
+  const handelCheck = (e) => {
+    
+    e.preventDefault();
+
+    if (!create.comment) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: 'Please write something !'
+      })
+      
+    }else   {
+      handleSubmit();
+      setCreate({
+        comment:""
+      })
+    } 
+  }
 
   useEffect(() => { 
     
@@ -234,10 +260,14 @@ const DevProfile = () => {
                         .filter((el) => el.devId === dev._id)
                         .map((el) => (
                           <>
-                            <Card.Title>{el.name}</Card.Title>
-                            <div>{el.comment}</div>
+                            <Card.Title className="nmcm">{el.name}&nbsp;:</Card.Title>
+                            <div className="cmmt">-&nbsp;{el.comment}</div>
+                            
+                           <div className="crded"> <Comments  com={el}/></div>
                           </>
+                          
                         ))}
+                       
                     </Card>
                   </div>
                   {test&&
@@ -256,7 +286,7 @@ const DevProfile = () => {
                             rows={1}
                           />
                         </Form.Group>
-                        <Button onClick={handleSubmit} variant="success">
+                        <Button onClick={handelCheck} variant="success">
                           {" "}
                           Send
                         </Button>
@@ -287,7 +317,7 @@ const DevProfile = () => {
                 </h3>
                 <h3>
                   {" "}
-                  <i className="fas fa-phone" /> {dev.phone}{" "}
+                  <i className="fas fa-phone" /> +{dev.phone}{" "}
                 </h3>
                 <h3>
                   {" "}

@@ -3,7 +3,7 @@ import { CurrentUser, GetAllDev } from "../../apis/UserApi";
 import { Avatar } from "@chakra-ui/react";
 import "./Navvbare.css";
 import { Link } from "react-router-dom";
-const Navvbare = () => {
+const Navvbare = ({ping}) => {
   
 
   const [user, setUser] = useState({});
@@ -28,7 +28,7 @@ const Navvbare = () => {
   useEffect(() => {
     isLoggedIn();
     
-  }, []);
+  }, [ping]);
  
 
   return (

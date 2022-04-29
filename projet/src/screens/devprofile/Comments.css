@@ -6,3 +6,6 @@
     display: flex;
     justify-content: left;
 }
+.crd{
+    width: 80px !important;
+}

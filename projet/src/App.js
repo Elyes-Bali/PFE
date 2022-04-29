@@ -29,15 +29,17 @@ import Protectedroute1 from "./components/routes/Protectedroute1";
 import Errorpage from "./components/error/Errorpage";
 import Checkemail from "./components/fgpassword/Checkemail";
 import PasswordRes from "./components/fgpassword/PasswordRes";
+import { useState } from "react";
+import Commentsdb from "./screens/dashboard/Commentsdb";
 
 
 function App() {
-
+const [ping,setPing]=useState(false)
 
   return (
     <div>
     
-      <Navvbare />
+      <Navvbare ping={ping}/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
@@ -57,6 +59,7 @@ function App() {
           <Route path="/chart" element={<ChartDb />} />
           <Route path="/chausers" element={<Chartusers />} />
           <Route path="/messdb" element={<Messg />} />
+          <Route path="/comdb" element={<Commentsdb />} />
         </Route>
         <Route element={<Devroute />}>
           <Route path="/devof" element={<DevOffers />} />
@@ -77,7 +80,7 @@ function App() {
         </Route>
         <Route path="/logout" element={<Logout />} />
         <Route element={<Protectedroute1 />}>
-          <Route path="/Profil" element={<Profile />} />
+          <Route path="/Profil" element={<Profile ping={ping} setPing={setPing}/>} />
         </Route>
       </Routes>
     </div>

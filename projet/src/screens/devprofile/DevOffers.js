@@ -14,7 +14,7 @@ const DevOffers = () => {
     setOffer(oflg);
    var r=[]
   offer?.filter((obj) =>
-      obj.postuledby.some((el) => {
+      obj.postuledby.filter((el) => {
         if (el._id === id) {
           // list.unshift(obj);
         return  r.push(obj)
@@ -55,7 +55,7 @@ const DevOffers = () => {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel className="sss">
+          <TabPanel className="sss row">
           {offer
                 .filter((el) => el.donebyId === user._id)
                 .map((el) => (
@@ -88,6 +88,10 @@ const DevOffers = () => {
                     <br />
                     <Card.Text>
                     {el.isAffectted ?(<div><b>Status :</b> Is Affected</div>):(<div>Available !</div>)}
+                    </Card.Text>
+                    <br/>
+                    <Card.Text>
+                    {el.isCompleted ?(<div><b>Degree :</b> Completed</div>):(<div><b>Degree :</b> Not Completed !</div>)}
                     </Card.Text>
                   </Card.Body>
                 

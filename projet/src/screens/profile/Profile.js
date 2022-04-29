@@ -3,20 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { CurrentUser } from "../../apis/UserApi";
 import "./Profile.css";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  
-} from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InputControl from "../profiledev/InputControl";
 import { useNavigate } from "react-router-dom";
 
-
-
-const Profile = () => {
+const Profile = ({ ping, setPing }) => {
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -26,7 +17,7 @@ const Profile = () => {
     city: "",
     state: "",
     zip: "",
-    adress:"",
+    adress: "",
     role: "",
     name: "",
     github: "",
@@ -53,21 +44,20 @@ const Profile = () => {
     setMultipleFiles(e.target.files);
   };
 
-  useEffect( () => {
+  useEffect(() => {
     isLoggedIn();
   }, []);
   console.log(user);
 
-const hundelRemove = (idx)=>{
-  const newState = {
-    ...user,
-    images:user.images.map((item,index)=>{
-      return idx === index ? {...item,filePath:""}:item
-    }),
+  const hundelRemove = (idx) => {
+    const newState = {
+      ...user,
+      images: user.images.map((item, index) => {
+        return idx === index ? { ...item, filePath: "" } : item;
+      }),
+    };
+    setUser(newState);
   };
-  setUser(newState);
-}
-
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -110,32 +100,38 @@ const hundelRemove = (idx)=>{
   const hundelUpdate = async () => {
     const config = { headers: { "Content-Type": "application/json" } };
     const res = await axios.put(`/api/user/update/${user._id}`, user, config);
-    navigate('/');
-    window.location.reload();
+    setPing(!ping);
+    // navigate('/');
+    // window.location.reload();
   };
 
-  
-
   return (
-    <div id='Profile'>
+    <div id="Profile">
       <section>
         <div className="container pill shadow my-5 py-5">
           <div className="row">
-            <div className="col-md-5"><br/><br/><br/>
+            <div className="col-md-5">
+              <br />
+              <br />
+              <br />
               <h1 className="text-center text-bold">
                 Upload Your Profile Picture{" "}
               </h1>
-              
-                <div className="imggg">
-                  {user?.pic && <img
+
+              <div className="imggg">
+                {user?.pic && (
+                  <img
                     className="imgg"
                     alt="not fount"
                     width={"250px"}
                     src={`http://localhost:5000${user?.pic}`}
-                  />}
-                 {!user.pic && <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4JvZuw_Q_yEggsD8I1qXrKlRP9mtf6MuwA&usqp=CAU" />}
-                  <br />
-                  {user.pic &&
+                  />
+                )}
+                {!user.pic && (
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4JvZuw_Q_yEggsD8I1qXrKlRP9mtf6MuwA&usqp=CAU" />
+                )}
+                <br />
+                {user.pic && (
                   <button
                     className="btn btn-primary w-50 mt-4 rounded-pill"
                     onClick={(event) => {
@@ -144,16 +140,15 @@ const hundelRemove = (idx)=>{
                   >
                     Remove
                   </button>
-                  }
-                </div>
-             
+                )}
+              </div>
 
               <br />
 
               <br />
               <input
                 type="file"
-                className="form-control myImage"
+                className=" myimage"
                 onChange={uploadFileHandler}
               />
             </div>
@@ -185,26 +180,25 @@ const hundelRemove = (idx)=>{
                         setUser({ ...user, phone: e.target.value })
                       }
                       placeholder="Phone Number"
-                     
                     />
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
-                <Form.Group className="mb-3" controlId="formGridAddress1">
-                  <Form.Label>Email</Form.Label>
-                  <input
-                    className="form-control eml w-100"
-                    disabled={true}
-                    type="text"
-                    value={user?.email}
-                    onChange={(e) =>
-                      setUser({ ...user, email: e.target.value })
-                    }
-                    placeholder="Change you're Email ?"
-                  />
-                </Form.Group>
-                  
-                <Form.Group as={Col} controlId="formGridPassword">
+                  <Form.Group className="mb-3" controlId="formGridAddress1">
+                    <Form.Label>Email</Form.Label>
+                    <input
+                      className="form-control eml w-100"
+                      disabled={true}
+                      type="text"
+                      value={user?.email}
+                      onChange={(e) =>
+                        setUser({ ...user, email: e.target.value })
+                      }
+                      placeholder="Change you're Email ?"
+                    />
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="formGridPassword">
                     <Form.Label className="px-2 ">Age:</Form.Label>
                     <input
                       className="form-control"
@@ -216,7 +210,6 @@ const hundelRemove = (idx)=>{
                       placeholder="Your Age"
                     />
                   </Form.Group>
-
                 </Row>
                 <Form.Group className="mb-3" controlId="formGridAddress1">
                   <Form.Label>Address</Form.Label>
@@ -274,12 +267,21 @@ const hundelRemove = (idx)=>{
 
                 {/* <img src={user?.pic}/> */}
               </Form>
+              {user.role==="clt" &&
+              <Button
+                className="butt rounded-pill"
+                variant="primary"
+                type="button"
+                onClick={hundelUpdate}
+              >
+                Save
+              </Button>}
             </div>
           </div>
         </div>
       </section>
 
-      {user.role === "dev" ? (
+      {user.role === "dev" && (
         <div>
           <div className="container pill shadow my-5">
             <Tabs variant="soft-rounded" colorScheme="red">
@@ -319,7 +321,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Group as={Col} controlId="Name">
                                   <Form.Label>Full Name</Form.Label>
                                   <Form.Control
-                                  className="form-control"
+                                    className="form-control"
                                     type="text"
                                     placeholder="Full Name"
                                     name="name"
@@ -333,7 +335,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Group as={Col} controlId="Title">
                                   <Form.Label>Title</Form.Label>
                                   <Form.Control
-                                  className="form-control"
+                                    className="form-control"
                                     type="text"
                                     placeholder="Enter your title eg. Frontend developer"
                                     name="title"
@@ -352,7 +354,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Group as={Col} controlId="College">
                                   <Form.Label>College</Form.Label>
                                   <Form.Control
-                                  className="form-control"
+                                    className="form-control"
                                     type="text"
                                     placeholder="Enter your College Name"
                                     name="college"
@@ -371,7 +373,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Group as={Col} controlId="Github">
                                   <Form.Label>Github</Form.Label>
                                   <Form.Control
-                                  className="form-control"
+                                    className="form-control"
                                     placeholder="Enter your Github profile link"
                                     name="github"
                                     value={user?.github}
@@ -387,7 +389,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Group as={Col} controlId="Linkedin">
                                   <Form.Label>Linkedin</Form.Label>
                                   <Form.Control
-                                  className="form-control"
+                                    className="form-control"
                                     placeholder="Enter your Linkedin profile link"
                                     name="linkedin"
                                     value={user?.linkedin}
@@ -404,7 +406,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Label>Your Projects</Form.Label>
 
                                 <InputControl
-                                className="form-control"
+                                  className="form-control"
                                   placeholder="Line 1"
                                   name="project"
                                   value={user?.project}
@@ -417,7 +419,7 @@ const hundelRemove = (idx)=>{
                                 />
                                 <br />
                                 <InputControl
-                                className="form-control"
+                                  className="form-control"
                                   placeholder="Line 2"
                                   name="project1"
                                   value={user?.project1}
@@ -430,7 +432,7 @@ const hundelRemove = (idx)=>{
                                 />
                                 <br />
                                 <InputControl
-                                className="form-control"
+                                  className="form-control"
                                   placeholder="Line 3"
                                   name="project2"
                                   value={user?.project2}
@@ -448,7 +450,7 @@ const hundelRemove = (idx)=>{
                                 <Form.Label>Languages</Form.Label>
 
                                 <InputControl
-                                className="form-control"
+                                  className="form-control"
                                   placeholder="Line 1"
                                   name="languages"
                                   value={user?.languages}
@@ -461,7 +463,7 @@ const hundelRemove = (idx)=>{
                                 />
                                 <br />
                                 <InputControl
-                                className="form-control"
+                                  className="form-control"
                                   placeholder="Line 2"
                                   name="languages1"
                                   value={user?.languages1}
@@ -474,7 +476,7 @@ const hundelRemove = (idx)=>{
                                 />
                                 <br />
                                 <InputControl
-                                className="form-control"
+                                  className="form-control"
                                   placeholder="Line 3"
                                   name="languages2"
                                   value={user?.languages2}
@@ -499,7 +501,7 @@ const hundelRemove = (idx)=>{
                     type="file"
                     name="file"
                     onChange={(e) => MultipleFileChange(e)}
-                    className="form-control"
+                    className="igmh myimage"
                     multiple
                   />
                   <br />
@@ -514,14 +516,29 @@ const hundelRemove = (idx)=>{
                   <div className="imgsmap  ">
                     {user?.images
                       ? user.images.map((el, idx) => (
-                          <div className={user.images[idx].filePath===""?null:"imgs" } key={idx}>
+                          <div
+                            className={
+                              user.images[idx].filePath === "" ? null : "imgs"
+                            }
+                            key={idx}
+                          >
                             <img
-                              
-                              src={user.images[idx].filePath===""?null:`http://localhost:5000${el.filePath}`}
+                              src={
+                                user.images[idx].filePath === ""
+                                  ? null
+                                  : `http://localhost:5000${el.filePath}`
+                              }
                               width="250"
                             />
-                          
-                            {user.images[idx].filePath===""?null:<button className="btn btn-danger rounded-pill" onClick={()=>hundelRemove(idx)}>Remove</button>}
+
+                            {user.images[idx].filePath === "" ? null : (
+                              <button
+                                className="btn btn-danger rounded-pill"
+                                onClick={() => hundelRemove(idx)}
+                              >
+                                Remove
+                              </button>
+                            )}
                           </div>
                         ))
                       : null}
@@ -530,48 +547,31 @@ const hundelRemove = (idx)=>{
                 <TabPanel>
                   <Form.Group className="mb-3" controlId="Summary">
                     <Form.Label>Your Summary</Form.Label>
-                    
-                      
-                      <textarea
-                        className="form-control "
-                        placeholder="Talk About ur self"
-                        rows={7}
-                      
-                        name="summary"
-                        value={user?.summary}
-                        onChange={(e) =>
-                          setUser({ ...user, summary: e.target.value })
-                        }
-                      ></textarea>
-                    
+
+                    <textarea
+                      className="form-control "
+                      placeholder="Talk About ur self"
+                      rows={7}
+                      name="summary"
+                      value={user?.summary}
+                      onChange={(e) =>
+                        setUser({ ...user, summary: e.target.value })
+                      }
+                    ></textarea>
                   </Form.Group>
                   <Button
-                    className="butt rounded-pill"
+                    className="butt1 rounded-pill"
                     variant="primary"
                     type="button"
                     onClick={hundelUpdate}
-                    
                   >
                     Save
                   </Button>
-                 
                 </TabPanel>
               </TabPanels>
             </Tabs>
           </div>
         </div>
-      ) : (
-        
-        <Button
-          className="butt rounded-pill"
-          variant="primary"
-          type="button"
-          onClick={hundelUpdate}
-         
-        >
-          Save
-        </Button>
-       
       )}
     </div>
   );

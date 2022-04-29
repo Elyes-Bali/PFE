@@ -1,77 +1,81 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
-import { GetAllCom } from "../../apis/Comments";
-import { CurrentUser } from "../../apis/UserApi";
+import { Button, Form, Modal } from "react-bootstrap";
+import axios from "axios";
 import "./Comments.css";
+import { Removcom } from "../../apis/Comments";
+import Swal from "sweetalert2";
 
-const Comments = ({ dev }) => {
-    const [create, setCreate] = useState({
-        name: "",
-        comment: "",
-        devId: "",
-        writedbyid: "",
-      });
+const Comments = ({ com }) => {
+  const [create, setCreate] = useState({});
 
-      const [comm,setComm]=useState({})
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
-      const isLoggedIn = async () => {
-        const userLg = await CurrentUser();
-        setCreate({
-          ...create,
-          name: userLg.data.user.username,
-          writedbyid: userLg.data.user._id,
-          devId:dev._id
-        });
-      };
+  const hundelUpdate = async () => {
+    const config = { headers: { "Content-Type": "application/json" } };
+    const res = await axios.put(
+      `/api/comment/edite/${create._id}`,
+      create,
+      config
+    );
 
-      const isComment = async () => {
-        const userLg = await GetAllCom();
-       setComm(userLg)
-      };
+    window.location.reload();
+  };
 
-      const handleSubmit = async () => {
-    
-        const config = { headers: { "Content-Type": "application/json" } };
-        try {
-          const res = await axios.post("/api/comment/addcom",create,config);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+  
 
-
-      useEffect(() => {
-        isLoggedIn();
-        isComment();
-      }, []);
-// console.log(create);
-// console.log(comm);
+  useEffect(() => {
+    setCreate(com);
+  }, []);
+  // console.log(create);
 
   return (
     <div>
-      <div className="container shadow box clr ">
-        <Form>
-            <div>
-          <Card>
-            <Card.Header as="h5">Comments</Card.Header>
-            {comm.map((el) => (
-            <div>{el.comment}</div>))}
-          </Card>
-          </div>
-          <Form.Group
-            className="mb-3 "
-            controlId="exampleForm.ControlTextarea1"
-          >
-          
-            <Form.Control  value={create?.comment}
-                onChange={(e) =>
-                  setCreate({ ...create, comment: e.target.value })
-                } placeholder="Your Comment" as="textarea" rows={1} />
-          </Form.Group>
-          <Button onClick={handleSubmit} variant="success"> Send</Button>
-        </Form>
+      <div className="row">
+        <Button className="crd" onClick={handleShow} variant="primary">
+          Edit
+        </Button>
+        <br />
+        <br />
+        <Button
+        className="crd"
+          variant="danger"
+          onClick={() => {
+            Removcom(create._id);
+          }}
+        >
+          DELETE
+        </Button>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Comment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              placeholder="comment"
+              value={create?.comment}
+              onChange={(e) =>
+                setCreate({ ...create, comment: e.target.value })
+              }
+            />
+          </Form.Group>
+          <br />
+
+          <br />
+          <Button onClick={hundelUpdate} variant="success" type="button" block>
+            Update
+          </Button>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

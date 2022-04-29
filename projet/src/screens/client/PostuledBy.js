@@ -12,16 +12,32 @@ const PostuledBy = ({ offrr, dev, key }) => {
   const [list, setList] = useState([]);
   const [offer, setOffer] = useState({});
 
-  const hundelPosted = async (el) => {
+  const handlemessage = async (email) => {
+    const config = { headers: { "Content-Type": "application/json" } };
+    const data={email:email,message:`Hello our dear Freelancer , Our Client ${offer.createdbyName} has affected you this project - ${offer.prjectname
+    } -`}
+    try {
+      const res = await axios.post("/api/sendemail/mailer", data, config);
+
+    
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  const hundelPosted = async (el,email) => {
     hundelUpdate(offrr._id, {
       donebyId: el._id,
       donebyName: el.username,
       isAffectted: true,
+      
     });
 
     const Useroffer = await Getone(offer._id);
     setOffer(Useroffer);
     console.log(offer);
+    handlemessage(email);
   };
 
   const hundelRemove = async () => {
@@ -96,7 +112,7 @@ const PostuledBy = ({ offrr, dev, key }) => {
                     {!offer?.isAffectted && offer?.donebyId != el._id ? (
                       <>
                         <Button
-                          onClick={() => hundelPosted(el)}
+                          onClick={() => hundelPosted(el,el.email)}
                           variant="success"
                         >
                           AFFECT TO

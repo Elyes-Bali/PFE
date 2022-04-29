@@ -35,8 +35,17 @@
 .butt{
     position: flex;
     animation: alternate-reverse;
-    width: 100%;
-    
+    width: 25%;
+    margin: 0 auto !important;
+    margin-top: 25px;
+}
+
+.butt1{
+  position: flex;
+  animation: alternate-reverse;
+  width: 25%;
+  margin-left: 37% !important;
+  margin-top: 25px;
 }
 .imgsmap{
   display: flex;
@@ -69,11 +78,30 @@
 cursor: not-allowed;
 outline: none;
 }
-input[type=file] {
+/* input[type=file] {
   color: transparent !important;
 }
 input[type=file]::before {
 content: "Choose a picture";
 color: black;
 margin-right: 10px; 
+} */
+.myimage::file-selector-button{
+  cursor: pointer;
+  width: 100%;
+  z-index: 2;
+  height: 5vh;
+  border: none;
+  margin: 0%;
+  font: 400 1vmax cursive;
+  transition: all 0.5s;
+  padding: 0 1vmax;
+  color: white;
+  background-color: rgb(4, 128, 252);
+}
+.myimage{
+  margin-left: 110px !important;
+}
+.igmh{
+ margin-left:500px !important; 
 }

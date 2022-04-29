@@ -32,4 +32,26 @@ router.post("/addcom", async (req, res) => {
       console.log(error);
     }
   });
+
+
+
+  router.put("/edite/:id" , async(req,res) => {
+    console.log(req.body)
+    try{
+      const result= await Comments.findByIdAndUpdate({_id:req.params.id},{$set:{...req.body}})
+      res.send("comment updated")
+    }catch(error){
+        res.status(400).send({message:"No comment with this id"})
+    }
+  }, )
+
+  router.delete("/delcom/:id", async(req,res)=>{
+    try {
+        const result =await Comments.deleteOne({_id:req.params.id});
+     res.status(200).send({msg:"comment deleted successfuly"})
+    } catch (error) {
+       console.log(error);
+    }
+ })
+
   module.exports = router;

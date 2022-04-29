@@ -125,6 +125,17 @@ const SideBar = () => {
                   </li>
                   
                 </ul>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                  <Link to="/comdb">
+                    <a  className="nav-link">
+                      <i className="far fa-circle nav-icon" />
+                      <p>Comments</p>
+                    </a>
+                  </Link>
+                  </li>
+                  
+                </ul>
               </li>
               <li className="nav-header">MESSAGES</li>
 

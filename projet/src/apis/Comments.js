@@ -10,3 +10,15 @@ export const GetAllCom = async () => {
       console.log(error);
     }
   };
+
+
+  export const Removcom = async (id) => {
+  
+    try {
+      const config = { headers: { "Content-Type": "application/json" } };
+    const res = await axios.delete(`/api/comment/delcom/${id}` ,config);
+     GetAllCom();
+    } catch (error) {
+      console.log(error);
+    }
+  };

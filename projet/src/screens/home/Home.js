@@ -26,7 +26,7 @@ const Home = () => {
               </Flash>
               <Zoom left>
               <p className="lead text-center fs-4 mb-5 text-white">
-              We provide you with the possibility to work and complete your tasks.
+              We provide you with the ability to work and complete your tasks.
               </p>
               </Zoom>
               <div className="buttons d-flex justify-content-center">

@@ -5,8 +5,8 @@
     background: Orgb(0, 101, 219);
     background: linear-gradient(
       900deg,
-      rgb(235, 75, 101) 50%,
-      rgb(63, 207, 236) 90%
+      rgb(232, 86, 110) 50%,
+      rgb(104, 226, 251) 90%
     );
     min-height: 500px;
   }

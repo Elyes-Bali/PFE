@@ -3,11 +3,11 @@ import { Button, Form, Modal } from "react-bootstrap";
 import axios from "axios";
 import "./Comments.css";
 import { Removcom } from "../../apis/Comments";
-import Swal from "sweetalert2";
+import { CurrentUser } from "../../apis/UserApi";
 
 const Comments = ({ com }) => {
   const [create, setCreate] = useState({});
-
+  const [user, setUser] = useState({});
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -23,15 +23,21 @@ const Comments = ({ com }) => {
     window.location.reload();
   };
 
+  const isUser = async () => {
+    const AllUser = await CurrentUser();
+    setUser(AllUser.data.user);
+  };
   
 
   useEffect(() => {
     setCreate(com);
+    isUser();
   }, []);
-  // console.log(create);
+  console.log(user);
 
   return (
     <div>
+      {create.writedbyid === user._id &&
       <div className="row">
         <Button className="crd" onClick={handleShow} variant="primary">
           Edit
@@ -47,7 +53,7 @@ const Comments = ({ com }) => {
         >
           DELETE
         </Button>
-      </div>
+      </div>}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Comment</Modal.Title>

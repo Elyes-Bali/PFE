@@ -1,27 +1,31 @@
 import React, { useState } from "react";
 import Footer from "../../components/footer/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const PasswordRes = () => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState({
-        password1: "", 
-        password2: "", 
+        password: "", 
+        confirmpassword: "", 
       });
-
-      const handleChange = (event) => {
-        let name = event.target.name;
-        let value = event.target.value;
+      const param = useParams()
+  
+      // const handleChange = (event) => {
+      //   let name = event.target.name;
+      //   let value = event.target.value;
     
-        setUser({ ...user, [name]: value });
-      };
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+      //   setUser({ ...user, [name]: value });
+      // };
+    const handleSubmit = async (e) => {
+      console.log(user)
+        e.preventDefault();
         const config = { headers: { "Content-Type": "application/json" } };
         try {
-            
-
+          const res = await axios.put(`/api/user/resetPassword/${param.token}`, user, config);
+          window.alert("Your password changed")
+          navigate("/login")
         } catch (error) {
             console.log(error);
         }
@@ -48,30 +52,32 @@ const PasswordRes = () => {
                 <input
                   type="password"
                   className="form-control"
-                  id="exampleInputPassword1"
+                 
                   name="password"
-                    value={user.password1}
-                    onChange={handleChange}
+                    value={user.password}
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })}
                 />
               </div>
               <div className="mb-3">
-                <label for="exampleInputPassword1" className="form-label">
-                  Password
+                <label for="exampleInput" className="form-label">
+                 Confirm Password
                 </label>
                 <input
                   type="password"
                   className="form-control"
-                  id="exampleInputPassword1"
-                  name="password"
-                    value={user.password2}
-                    onChange={handleChange}
+               
+                  name="password2"
+                    value={user.confirmpassword}
+                    onChange={(e) =>
+                      setUser({ ...user, confirmpassword: e.target.value })}
                 />
               </div>
 
               <button
-                type="submit"
+                type="button"
                 className="btn btn-primary w-100 mt-4 rounded-pill"
-                // onClick={(e) => handleSubmit(e)}
+                onClick={(e) => handleSubmit(e)}
               >
                 Submit
               </button>

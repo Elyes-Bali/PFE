@@ -9,10 +9,12 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
+import Swal from "sweetalert2";
 import { CurrentUser } from "../../apis/UserApi";
 import "./CreateOffers.css";
-
+import { useNavigate } from 'react-router-dom';
 const CreateOffers = () => {
+  const navigate = useNavigate();
   const [create, setCreate] = useState({
     createdbyId: "",
     createdbyName: "",
@@ -44,10 +46,28 @@ const CreateOffers = () => {
       const res = await axios.post("/api/offer/create", create, config);
 
       alert(`${res.data.msg}`);
+      navigate('/offers')
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handelCheck = (e) => {
+    e.preventDefault();
+
+    if (!create.prjectname || !create.budget|| !create.detail || !create.duree ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: 'Please check your informations !'
+      })
+      
+    }else  {
+      handleSubmit();
+      
+    } 
+  }
 
   const format = (val) => `$` + val;
   const parse = (val) => val.replace(/^\$/, "");
@@ -122,7 +142,7 @@ const CreateOffers = () => {
             <Button
               className="btn  me-4 rounded-pill px-4 py-2"
               variant="danger"
-              onClick={handleSubmit}
+              onClick={handelCheck}
               href='/Offers'
             >
               <i class="fa fa-check px-1" aria-hidden="true"></i>Submit

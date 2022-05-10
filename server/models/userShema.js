@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const crypto = require("crypto");
 //User Schema Or Document Structure
 const userSchema = new mongoose.Schema({
   username: {
@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
   },
+  resetPasswordToken: String,
+    resetPasswordExpire: Date,
+
 
   pic: {
     type: String,
@@ -88,7 +91,8 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   images: [Object],
-});
+ 
+}  ,{ timestamps: true });
 
 // Hashing Password to Secure
 userSchema.pre("save", async function (next) {
@@ -109,6 +113,20 @@ userSchema.methods.generateToken = async function () {
     console.log(error);
   }
 };
+
+userSchema.methods.getResetPasswordToken =  function () {
+  const resetToken = crypto.randomBytes(20).toString('hex')
+
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex')
+
+  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000) // Ten Minutes
+
+  return resetToken;
+}
+
 
 // Create Model
 module.exports = Users = mongoose.model("USER", userSchema);

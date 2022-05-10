@@ -55,11 +55,16 @@ const Register = () => {
     }
   }
   
+  
+
+
 
   const handelCheck = (e) => {
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const pwdFilter = /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*[\d|@#$!%*?&])[\p{L}\d@#$!%*?&]{8,96}$/gmu;
     e.preventDefault();
-
+ 
+      
     if (!user.username || !user.email|| !user.password || !user.role ) {
       Swal.fire({
         icon: 'error',
@@ -68,13 +73,17 @@ const Register = () => {
         footer: 'Please check your informations !'
       })
       
-    }else  if (regEx.test(user.email)) {
+    }else  if (regEx.test(user.email) && pwdFilter.test(user.password)) {
       handleSubmit();
-    } else if (!regEx.test(user.email) && user.email !== "") {
-      alert("Email is Not Valid");
-    
-
+      
+    } else if (!pwdFilter.test(user.password) && user.password !==""){
+      alert(" password must be a minimum of 8 characters including number, Upper, Lower And one special character");
     }
+    
+  else if (!regEx.test(user.email) && user.email !== "") {
+      alert("Email is Not Valid");
+    }
+
   }
 
     

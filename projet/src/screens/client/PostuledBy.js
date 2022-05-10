@@ -14,8 +14,8 @@ const PostuledBy = ({ offrr, dev, key }) => {
 
   const handlemessage = async (email) => {
     const config = { headers: { "Content-Type": "application/json" } };
-    const data={email:email,message:`Hello our dear Freelancer , Our Client ${offer.createdbyName} has affected you this project - ${offer.prjectname
-    } -`}
+    const data={email:email,message:`Hello our dear Freelancer , Our Client ${offer.createdbyName} has affected you this project : ${offer.prjectname
+    } `}
     try {
       const res = await axios.post("/api/sendemail/mailer", data, config);
 

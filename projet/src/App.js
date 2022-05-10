@@ -46,7 +46,7 @@ const [ping,setPing]=useState(false)
 
         <Route path="*" element={<Errorpage />} />
         <Route path="/check" element={<Checkemail />} />
-        <Route path="/passres" element={<PasswordRes />} />
+        <Route path="/reset/:token" element={<PasswordRes />} />
 
         <Route path="/Comunity" element={<Comunity />} />
         <Route element={<Cltroute />}>

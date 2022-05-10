@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import Footer from "../../components/footer/Footer";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const Checkemail = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState({
-        email2: "", 
+    const [useremail, setUseremail] = useState({
+        email: "" ,
       });
 
-      const handleChange = (event) => {
-        let name = event.target.name;
-        let value = event.target.value;
     
-        setUser({ ...user, [name]: value });
-      };
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+      e.preventDefault();
         const config = { headers: { "Content-Type": "application/json" } };
         try {
-            
-
+          const res = await axios.post("/api/user/forgotpassword", useremail, config);
+          window.alert("Check Your Email")
         } catch (error) {
             console.log(error);
         }
@@ -51,8 +47,9 @@ const Checkemail = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   name="email"
-                  value={user.email}
-                  onChange={handleChange}
+                  value={useremail.email}
+                  onChange={(e) =>
+                    setUseremail({ ...useremail, email: e.target.value })}
                 />
                 <div id="emailHelp" className="form-text">
                   We'll never share your email with anyone else.
@@ -61,11 +58,11 @@ const Checkemail = () => {
 
             
               <button
-                type="submit"
+                type="button"
                 className="btn btn-primary w-100 mt-4 rounded-pill"
-                onClick={handleSubmit}
+                onClick={(e)=>handleSubmit(e)}
               >
-                Next
+               Verify
               </button>
             </form>
           </div>

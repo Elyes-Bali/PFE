@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Register.css'
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Swal from "sweetalert2";
 import Footer from "../../components/footer/Footer";
+import { GetAllUsers } from "../../apis/UserApi";
+
 
 const Register = () => {
-
+  const [allusers,setAllusers]= useState([]);
   const navigate = useNavigate();
 
   const [user, setUser]= useState({
@@ -17,7 +19,7 @@ const Register = () => {
     role : "",
     pic : "",
   });
-
+  
   //Handle Input
   const handleInput = (event)=>{
     let name = event.target.name;
@@ -25,28 +27,24 @@ const Register = () => {
 
     setUser({...user,[name]:value});
   }
+  const isUsers = async () => {
+    const uslg = await GetAllUsers();
+    setAllusers(uslg);
+  };
 
   //Handel Submit
   const handleSubmit = async ()=>{
    
-    //Object DeStructuring
-    //Store Object Data into Variables
+    
     const config = {headers: {"Content-Type": "application/json"},}
     try {
-      //It is Submitted on port 3000 by default
-      //wich os Front end But we need to 
-      //Submit it on Backend which is on
-      // Port 3001. So we need Proxy
+     
       const res = await axios.post('/api/user/register', user,config)
-       
-        
-        
-      
 
-      if (res.status === 400 || !res){
-        window.alert("Already Used Details")
+      if (res.status === 400 || !res ){
+        window.alert("Already Used Details");
       }else{
-        //You need to Restart the server for Proxy Works
+        
         window.alert("Registered Successfully");
         navigate('/login')
       }
@@ -62,6 +60,9 @@ const Register = () => {
   const handelCheck = (e) => {
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     const pwdFilter = /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*[\d|@#$!%*?&])[\p{L}\d@#$!%*?&]{8,96}$/gmu;
+    
+      
+    
     e.preventDefault();
  
       
@@ -76,17 +77,21 @@ const Register = () => {
     }else  if (regEx.test(user.email) && pwdFilter.test(user.password)) {
       handleSubmit();
       
-    } else if (!pwdFilter.test(user.password) && user.password !==""){
-      alert(" password must be a minimum of 8 characters including number, Upper, Lower And one special character");
+    }
+    else if (!pwdFilter.test(user.password) && user.password !==""){
+      window.alert(" Password must be a minimum of 8 characters including number, Upper, Lower And one special character");
     }
     
-  else if (!regEx.test(user.email) && user.email !== "") {
-      alert("Email is Not Valid");
+     else if (!regEx.test(user.email) && user.email !== "") {
+      window.alert("Email is Not Valid");
     }
-
+    
   }
 
+  useEffect(()=>{
+    isUsers();
     
+  },[])
 
 
   return (
@@ -123,7 +128,7 @@ const Register = () => {
                   name="username"
                   value={user.username}
                   onChange={handleInput}
-                  min={4}
+                  
                 />
                 
               </div>

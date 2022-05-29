@@ -6,6 +6,7 @@ import "./Profile.css";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InputControl from "../profiledev/InputControl";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Profile = ({ ping, setPing }) => {
   const [user, setUser] = useState({
@@ -101,8 +102,15 @@ const Profile = ({ ping, setPing }) => {
     const config = { headers: { "Content-Type": "application/json" } };
     const res = await axios.put(`/api/user/update/${user._id}`, user, config);
     setPing(!ping);
-    // navigate('/');
-    // window.location.reload();
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your data has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    navigate('/');
+    
   };
 
   return (

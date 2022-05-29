@@ -16,8 +16,9 @@
     justify-content: space-between;
   }
   .ctnn{ 
-    display: flex;
+    /* display: flex; */
     width: 50%;
+
   
   }
 

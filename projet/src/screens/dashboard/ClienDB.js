@@ -61,7 +61,7 @@ const ClienDB = () => {
                         <td>{el.email}</td>
                         <td>
                           <Button onClick={()=>{hundelUpdate(el._id,{authorize:!el.authorize});window.location.reload()}} variant="danger">
-                            {el.authorize ? "Blocke User":"Active User"}
+                            {el.authorize ? "Block User":"Active User"}
                           </Button>
                         </td>
                       </tr>

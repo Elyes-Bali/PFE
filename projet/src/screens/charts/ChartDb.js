@@ -52,7 +52,7 @@ const ChartDb = () => {
     labels: chart?.map((x) => x.prjectname.substring(0,11)),
     datasets: [
       {
-        label: `${chart?.length} Users Available`,
+        label: `${chart?.length} Offers Available`,
         data: chart.map((x) => x.budget),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
